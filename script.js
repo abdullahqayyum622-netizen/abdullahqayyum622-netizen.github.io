@@ -1,30 +1,54 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('#navLinks');
 
-if (menuToggle && navLinks) {
-  menuToggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    menuToggle.classList.toggle('open', open);
-    menuToggle.setAttribute('aria-expanded', String(open));
-  });
+const gifUrls = [
+  'https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif',
+  'https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif',
+  'https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif',
+  'https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif',
+  'https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif',
+  'https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif',
+  'https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif',
+  'https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif',
+  'https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif',
+  'https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif',
+  'https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif',
+  'https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif',
+  'https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif',
+  'https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif',
+  'https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif',
+  'https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif',
+  'https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif',
+  'https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif',
+  'https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif',
+  'https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif',
+  'https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif'
+];
 
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      menuToggle.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    });
+function fillMarquee(row, urls) {
+  if (!row) return;
+  const items = [...urls, ...urls, ...urls];
+  items.forEach((url) => {
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = 'Animated web project preview';
+    img.loading = 'lazy';
+    row.appendChild(img);
   });
 }
 
-const cursorGlow = document.querySelector('.cursor-glow');
-if (cursorGlow && !prefersReducedMotion) {
-  window.addEventListener('mousemove', (event) => {
-    cursorGlow.style.left = `${event.clientX}px`;
-    cursorGlow.style.top = `${event.clientY}px`;
-  }, { passive: true });
-}
+const rowOne = document.getElementById('marqueeRowOne');
+const rowTwo = document.getElementById('marqueeRowTwo');
+fillMarquee(rowOne, gifUrls.slice(0, 11));
+fillMarquee(rowTwo, gifUrls.slice(11));
+
+document.querySelectorAll('.fade-in').forEach((el) => {
+  const x = el.dataset.x || 0;
+  const y = el.dataset.y || 30;
+  const delay = el.dataset.delay || 0;
+  el.style.setProperty('--from-x', `${x}px`);
+  el.style.setProperty('--from-y', `${y}px`);
+  el.style.setProperty('--delay', `${delay}s`);
+});
 
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
@@ -33,108 +57,98 @@ const revealObserver = new IntersectionObserver((entries) => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.14, rootMargin: '40px 0px -20px 0px' });
 
-document.querySelectorAll('.reveal').forEach((element, index) => {
-  element.style.transitionDelay = `${Math.min(index * 0.035, 0.28)}s`;
-  revealObserver.observe(element);
-});
+document.querySelectorAll('.fade-in').forEach((el) => revealObserver.observe(el));
+
+const textBlock = document.querySelector('.animated-text');
+if (textBlock) {
+  const text = textBlock.dataset.text || '';
+  textBlock.innerHTML = text.split('').map((char) => {
+    const safe = char === ' ' ? '&nbsp;' : char.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return `<span class="char">${safe}</span>`;
+  }).join('');
+}
+
+function updateScrollAnimations() {
+  const scrollY = window.scrollY;
+  const about = document.querySelector('.animated-text');
+  if (about) {
+    const rect = about.getBoundingClientRect();
+    const start = window.innerHeight * 0.82;
+    const end = window.innerHeight * 0.18;
+    const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+    const chars = about.querySelectorAll('.char');
+    chars.forEach((char, index) => {
+      const local = Math.max(0, Math.min(1, (progress * chars.length - index) / 12));
+      char.style.opacity = String(0.2 + local * 0.8);
+    });
+  }
+
+  const marquee = document.querySelector('.marquee-section');
+  if (marquee && rowOne && rowTwo) {
+    const sectionTop = marquee.offsetTop;
+    const offset = (scrollY - sectionTop + window.innerHeight) * 0.3;
+    rowOne.style.transform = `translate3d(${offset - 200}px, 0, 0)`;
+    rowTwo.style.transform = `translate3d(${-offset + 200}px, 0, 0)`;
+  }
+
+  document.querySelectorAll('.project-card').forEach((card, index, cards) => {
+    const rect = card.getBoundingClientRect();
+    const progress = Math.max(0, Math.min(1, -rect.top / window.innerHeight));
+    const targetScale = 1 - (cards.length - 1 - index) * 0.03;
+    const scale = 1 - progress * (1 - targetScale);
+    card.style.transform = `scale(${scale})`;
+  });
+
+  requestAnimationFrame(updateScrollAnimations);
+}
 
 if (!prefersReducedMotion) {
-  document.querySelectorAll('.tilt-card').forEach((card) => {
-    card.addEventListener('mousemove', (event) => {
-      const rect = card.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      const rotateX = ((y / rect.height) - 0.5) * -8;
-      const rotateY = ((x / rect.width) - 0.5) * 8;
-      card.style.transform = `perspective(1100px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1100px) rotateX(0deg) rotateY(0deg) translateY(0)';
-    });
-  });
-
-  document.querySelectorAll('.magnetic').forEach((item) => {
-    item.addEventListener('mousemove', (event) => {
-      const rect = item.getBoundingClientRect();
-      const x = (event.clientX - rect.left - rect.width / 2) * 0.12;
-      const y = (event.clientY - rect.top - rect.height / 2) * 0.16;
-      item.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    });
-    item.addEventListener('mouseleave', () => {
-      item.style.transform = 'translate3d(0, 0, 0)';
-    });
-  });
+  requestAnimationFrame(updateScrollAnimations);
+} else {
+  document.querySelectorAll('.char').forEach((char) => char.style.opacity = '1');
 }
 
-const canvas = document.getElementById('particleCanvas');
-if (canvas && !prefersReducedMotion) {
-  const ctx = canvas.getContext('2d');
-  let width = 0;
-  let height = 0;
-  let particles = [];
-  let mouse = { x: 0, y: 0 };
+document.querySelectorAll('.magnet').forEach((element) => {
+  let active = false;
 
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    width = canvas.width = Math.floor(window.innerWidth * dpr);
-    height = canvas.height = Math.floor(window.innerHeight * dpr);
-    canvas.style.width = `${window.innerWidth}px`;
-    canvas.style.height = `${window.innerHeight}px`;
-    mouse = { x: width / 2, y: height / 2 };
-    const count = Math.min(85, Math.floor((window.innerWidth * window.innerHeight) / 17000));
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.25 * dpr,
-      vy: (Math.random() - 0.5) * 0.25 * dpr,
-      r: (Math.random() * 1.4 + 0.5) * dpr,
-      a: Math.random() * 0.45 + 0.15
-    }));
-  }
+  function move(event) {
+    if (prefersReducedMotion) return;
+    const rect = element.getBoundingClientRect();
+    const padding = 150;
+    const within =
+      event.clientX >= rect.left - padding &&
+      event.clientX <= rect.right + padding &&
+      event.clientY >= rect.top - padding &&
+      event.clientY <= rect.bottom + padding;
 
-  function draw() {
-    ctx.clearRect(0, 0, width, height);
-    particles.forEach((p, i) => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > width) p.vx *= -1;
-      if (p.y < 0 || p.y > height) p.vy *= -1;
-
-      const dx = mouse.x - p.x;
-      const dy = mouse.y - p.y;
-      const dist = Math.hypot(dx, dy);
-      if (dist < 170) {
-        p.x -= dx * 0.0014;
-        p.y -= dy * 0.0014;
-      }
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(186, 230, 253, ${p.a})`;
-      ctx.fill();
-
-      for (let j = i + 1; j < particles.length; j += 1) {
-        const q = particles[j];
-        const link = Math.hypot(p.x - q.x, p.y - q.y);
-        if (link < 120) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = `rgba(137,213,255, ${(1 - link / 120) * 0.12})`;
-          ctx.stroke();
+    if (!within) {
+      if (active) {
+        element.style.transition = 'transform 0.6s ease-in-out';
+        if (element.classList.contains('portrait-shell')) {
+          const translate = window.innerWidth >= 640 ? 'translateX(-50%)' : 'translate(-50%, -50%)';
+          element.style.transform = translate;
+        } else {
+          element.style.transform = 'translate3d(0,0,0)';
         }
+        active = false;
       }
-    });
-    requestAnimationFrame(draw);
+      return;
+    }
+
+    active = true;
+    element.style.transition = 'transform 0.3s ease-out';
+    const x = (event.clientX - (rect.left + rect.width / 2)) / 3;
+    const y = (event.clientY - (rect.top + rect.height / 2)) / 3;
+
+    if (element.classList.contains('portrait-shell')) {
+      const base = window.innerWidth >= 640 ? 'translateX(-50%)' : 'translate(-50%, -50%)';
+      element.style.transform = `${base} translate3d(${x}px, ${y}px, 0)`;
+    } else {
+      element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    }
   }
 
-  window.addEventListener('resize', resize, { passive: true });
-  window.addEventListener('mousemove', (event) => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    mouse = { x: event.clientX * dpr, y: event.clientY * dpr };
-  }, { passive: true });
-  resize();
-  draw();
-}
+  window.addEventListener('mousemove', move, { passive: true });
+});

@@ -3,243 +3,169 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Abdullah Qayyum — AI Engineer and Web Developer building premium websites, AI workflows, landing pages, and digital brand experiences." />
-  <meta name="theme-color" content="#07080d" />
-  <title>Abdullah Qayyum — AI Engineer & Web Developer</title>
+  <meta name="description" content="Abdullah Qayyum — AI Engineer and Web Developer portfolio with 3D motion, web design, AI workflows, and selected digital projects." />
+  <meta name="theme-color" content="#0C0C0C" />
+  <title>Abdullah Qayyum -- AI Engineer & Web Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
-  <div class="cursor-glow" aria-hidden="true"></div>
-
-  <header class="site-header" id="siteHeader">
-    <nav class="nav-shell" aria-label="Main navigation">
-      <a href="#home" class="brand-pill" aria-label="Abdullah Qayyum home">
-        <span class="brand-mark">AQ</span>
-        <span>Abdullah Qayyum</span>
-      </a>
-
-      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-
-      <div class="nav-links" id="navLinks">
-        <a href="#about">Story</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#process">Process</a>
-        <a href="#contact" class="nav-cta">Contact</a>
-      </div>
-    </nav>
-  </header>
-
-  <main id="main">
+  <main class="main-wrapper">
     <section class="hero-section" id="home">
-      <video class="hero-video" autoplay loop muted playsinline poster="" aria-hidden="true">
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260618_174853_aac61aa2-0f3f-4cf1-bc78-7f657dd11164.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-gradient" aria-hidden="true"></div>
-      <div class="hero-noise" aria-hidden="true"></div>
+      <nav class="top-nav fade-in" data-y="-20" data-delay="0">
+        <a href="#about">About</a>
+        <a href="#services">Price</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-      <div class="hero-content">
-        <div class="hero-top reveal">
-          <p class="eyebrow"><span></span> AI Engineer • Web Developer • Digital Builder</p>
-          <div class="availability"><span></span> Available for selected projects</div>
-        </div>
+      <div class="hero-heading-wrap fade-in" data-y="40" data-delay="0.15">
+        <h1 class="hero-heading">Hi, i&apos;m Abdullah</h1>
+      </div>
 
-        <div class="hero-bottom">
-          <div class="hero-copy reveal">
-            <h1>Building digital experiences that feel premium, fast and useful.</h1>
-            <p>I design and build modern websites, landing pages, business sites and AI-assisted workflows for brands that want a clean, trustworthy online presence.</p>
-            <div class="hero-actions">
-              <a class="btn btn-light magnetic" href="#projects">Explore Work</a>
-              <a class="btn btn-glass magnetic" href="mailto:abdullahqayyum622@gmail.com">Start a Project</a>
-              <a class="btn btn-ghost magnetic" href="assets/abdullah-qayyum-cv.pdf" download>Download CV</a>
-            </div>
+      <div class="portrait-shell magnet fade-in" data-y="30" data-delay="0.6">
+        <img src="assets/profile.png" alt="Abdullah Qayyum portrait" onerror="this.onerror=null;this.src='https://github.com/abdullahqayyum622-netizen.png';" />
+      </div>
+
+      <div class="hero-bottom">
+        <p class="hero-intro fade-in" data-y="20" data-delay="0.35">
+          an ai engineer and web developer driven by crafting clean, useful and unforgettable digital projects
+        </p>
+        <a class="contact-button fade-in magnet" data-y="20" data-delay="0.5" href="#contact">Contact Me</a>
+      </div>
+    </section>
+
+    <section class="marquee-section" id="work">
+      <div class="marquee-row" id="marqueeRowOne"></div>
+      <div class="marquee-row" id="marqueeRowTwo"></div>
+    </section>
+
+    <section class="about-section" id="about">
+      <img class="decor decor-moon fade-in" data-x="-80" data-delay="0.1" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png" alt="" />
+      <img class="decor decor-left fade-in" data-x="-80" data-delay="0.25" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png" alt="" />
+      <img class="decor decor-lego fade-in" data-x="80" data-delay="0.15" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png" alt="" />
+      <img class="decor decor-right fade-in" data-x="80" data-delay="0.3" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png" alt="" />
+
+      <div class="about-content">
+        <h2 class="section-heading hero-heading fade-in" data-y="40">About me</h2>
+        <p class="animated-text" data-text="I build professional websites, landing pages and AI-assisted workflows for people and brands that want to stand out online. My focus is clean design, smooth user experience, responsive layouts and practical digital systems that help clients present their best work with confidence."></p>
+        <a class="contact-button magnet fade-in" data-y="20" data-delay="0.2" href="#contact">Contact Me</a>
+      </div>
+    </section>
+
+    <section class="services-section" id="services">
+      <h2 class="services-heading fade-in" data-y="40">Services</h2>
+      <div class="services-list">
+        <article class="service-item fade-in">
+          <span>01</span>
+          <div>
+            <h3>Portfolio Websites</h3>
+            <p>Professional personal websites with strong hero sections, services, projects, proof, CV links and clear contact flow.</p>
           </div>
-
-          <aside class="hero-card reveal tilt-card" aria-label="Profile summary card">
-            <div class="profile-orbit" aria-hidden="true"></div>
-            <div class="profile-photo-wrap">
-              <img src="assets/profile.jpg" alt="Abdullah Qayyum profile photo" onerror="this.onerror=null;this.src='https://github.com/abdullahqayyum622-netizen.png';" />
-            </div>
-            <div>
-              <p class="card-label">Portfolio</p>
-              <h2>Abdullah Qayyum</h2>
-              <p class="card-role">AI Engineer & Web Developer</p>
-            </div>
-            <div class="metric-grid">
-              <div><strong>10+</strong><span>Website concepts</span></div>
-              <div><strong>20+</strong><span>Digital projects</span></div>
-            </div>
-            <div class="profile-tags">
-              <span>React</span><span>WordPress</span><span>AI Tools</span><span>SEO</span>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="marquee-section" aria-label="Skills and focus areas">
-      <div class="marquee-row">
-        <div class="marquee-track">
-          <span>Web Development</span><span>AI Workflows</span><span>Landing Pages</span><span>WordPress</span><span>React</span><span>Brand Websites</span><span>SEO Structure</span><span>3D Motion</span>
-          <span>Web Development</span><span>AI Workflows</span><span>Landing Pages</span><span>WordPress</span><span>React</span><span>Brand Websites</span><span>SEO Structure</span><span>3D Motion</span>
-        </div>
-      </div>
-      <div class="marquee-row reverse">
-        <div class="marquee-track">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Tailwind</span><span>GitHub</span><span>Canva</span><span>ChatGPT</span><span>Automation</span>
-          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Tailwind</span><span>GitHub</span><span>Canva</span><span>ChatGPT</span><span>Automation</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section about-section" id="about">
-      <div class="container about-grid">
-        <div class="section-kicker reveal">Story</div>
-        <div class="about-copy reveal">
-          <h2>I create websites that explain your work clearly and make people trust your brand.</h2>
-          <p>My focus is simple: strong visual direction, clear sections, smooth interactions and practical user flow. I combine web design, frontend development and AI-assisted planning to build websites that look professional and feel easy to use.</p>
-        </div>
-      </div>
-      <div class="floating-shape shape-one" aria-hidden="true">AI</div>
-      <div class="floating-shape shape-two" aria-hidden="true">UX</div>
-    </section>
-
-    <section class="section services-section" id="services">
-      <div class="container">
-        <div class="title-row reveal">
-          <p class="section-kicker">Services</p>
-          <h2>What I can build for you</h2>
-        </div>
-        <div class="service-list">
-          <article class="service-item reveal">
-            <span>01</span>
-            <div><h3>Portfolio Websites</h3><p>Professional personal websites with story, skills, services, projects, proof and contact flow.</p></div>
-          </article>
-          <article class="service-item reveal">
-            <span>02</span>
-            <div><h3>Business Websites</h3><p>Clean company websites for academies, startups, service businesses and local brands.</p></div>
-          </article>
-          <article class="service-item reveal">
-            <span>03</span>
-            <div><h3>Landing Pages</h3><p>Focused campaign pages designed around clarity, trust and lead generation.</p></div>
-          </article>
-          <article class="service-item reveal">
-            <span>04</span>
-            <div><h3>AI Workflow Setup</h3><p>Practical AI workflows for content planning, research, captions, automation and digital operations.</p></div>
-          </article>
-          <article class="service-item reveal">
-            <span>05</span>
-            <div><h3>Website Redesign</h3><p>Upgrading old websites with better layout, typography, mobile experience and calls to action.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section featured-section">
-      <div class="container featured-card reveal tilt-card">
-        <div class="featured-text">
-          <p class="section-kicker">Featured case study</p>
-          <h2>Knowledge Academy Website</h2>
-          <p>A modern academy website concept with course sections, parent-focused messaging, clear navigation and responsive layout. Built to make the academy look credible and easy to contact.</p>
-          <div class="project-meta">
-            <span>Responsive UI</span><span>Course Sections</span><span>3D Background</span><span>Lead Focused</span>
-          </div>
-        </div>
-        <div class="featured-preview" aria-hidden="true">
-          <div class="browser-bar"><span></span><span></span><span></span></div>
-          <div class="preview-hero"></div>
-          <div class="preview-lines"><i></i><i></i><i></i></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section projects-section" id="projects">
-      <div class="container">
-        <div class="title-row reveal">
-          <p class="section-kicker">Projects</p>
-          <h2>Selected work examples</h2>
-        </div>
-
-        <div class="sticky-projects">
-          <article class="project-panel reveal">
-            <div class="project-number">01</div>
-            <div class="project-info"><p>Academy website</p><h3>Knowledge Academy</h3><span>Modern education website with trust-building sections and smooth visuals.</span></div>
-            <div class="project-screen academy-screen"><b>KA</b></div>
-          </article>
-          <article class="project-panel reveal">
-            <div class="project-number">02</div>
-            <div class="project-info"><p>Business website</p><h3>Nobel Packaging</h3><span>Packaging company website structure with product categories and inquiry flow.</span></div>
-            <div class="project-screen package-screen"><b>NP</b></div>
-          </article>
-          <article class="project-panel reveal">
-            <div class="project-number">03</div>
-            <div class="project-info"><p>Personal branding</p><h3>LinkedIn Portfolio</h3><span>Professional personal-branding direction for credibility and conversion.</span></div>
-            <div class="project-screen brand-screen"><b>LI</b></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section process-section" id="process">
-      <div class="container">
-        <div class="title-row reveal">
-          <p class="section-kicker">Process</p>
-          <h2>A simple, professional workflow</h2>
-        </div>
-        <div class="process-grid">
-          <div class="process-card reveal tilt-card"><span>01</span><h3>Discovery</h3><p>Understand your goal, audience, services, pages and visual direction.</p></div>
-          <div class="process-card reveal tilt-card"><span>02</span><h3>Structure</h3><p>Plan the sections, content flow, CTAs and trust-building elements.</p></div>
-          <div class="process-card reveal tilt-card"><span>03</span><h3>Design & Build</h3><p>Create the website with clean UI, responsive layout and smooth motion.</p></div>
-          <div class="process-card reveal tilt-card"><span>04</span><h3>Launch</h3><p>Test mobile, check links, improve speed and publish to hosting.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section testimonials-section">
-      <div class="container testimonials-grid">
-        <article class="testimonial reveal tilt-card">
-          <p>“Abdullah understands how to turn a rough idea into a clean digital presence. The website structure was clear and professional.”</p>
-          <strong>Client feedback</strong>
         </article>
-        <article class="testimonial reveal tilt-card">
-          <p>“Fast, creative and practical. The design looked modern without making the website difficult to use.”</p>
-          <strong>Website project</strong>
+        <article class="service-item fade-in">
+          <span>02</span>
+          <div>
+            <h3>Web Development</h3>
+            <p>Responsive websites built with clean layouts, modern interactions, fast loading structure and mobile-first design.</p>
+          </div>
+        </article>
+        <article class="service-item fade-in">
+          <span>03</span>
+          <div>
+            <h3>Motion Design</h3>
+            <p>Smooth animations, hover effects, scroll movement, reveal transitions and 3D-style interfaces for premium presentation.</p>
+          </div>
+        </article>
+        <article class="service-item fade-in">
+          <span>04</span>
+          <div>
+            <h3>AI Workflows</h3>
+            <p>Practical AI workflows for research, content planning, captions, business processes and everyday digital work.</p>
+          </div>
+        </article>
+        <article class="service-item fade-in">
+          <span>05</span>
+          <div>
+            <h3>Brand Websites</h3>
+            <p>Clean business websites for academies, startups, service providers and local brands that need trust and clarity.</p>
+          </div>
         </article>
       </div>
     </section>
 
-    <section class="section contact-section" id="contact">
-      <div class="container contact-card reveal">
-        <div>
-          <p class="section-kicker">Contact</p>
-          <h2>Have a website idea? Let’s build it properly.</h2>
-          <p>Send your project details, pages needed and preferred style. I’ll respond with a clear direction.</p>
-        </div>
-        <div class="contact-actions">
-          <a class="btn btn-light" href="mailto:abdullahqayyum622@gmail.com">Email Me</a>
-          <a class="btn btn-glass" href="https://github.com/abdullahqayyum622-netizen" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn btn-glass" href="https://wa.me/923000000000" target="_blank" rel="noreferrer">WhatsApp</a>
-        </div>
-        <form class="email-form" action="https://formsubmit.co/abdullahqayyum622@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New portfolio inquiry" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="email" name="email" placeholder="Your email address" required />
-          <button type="submit">Send</button>
-        </form>
+    <section class="projects-section" id="projects">
+      <h2 class="section-heading hero-heading fade-in" data-y="40">Project</h2>
+      <div class="project-stack">
+        <article class="project-card" style="--i:0">
+          <div class="project-top">
+            <span class="project-number">01</span>
+            <div class="project-name">
+              <p>Client</p>
+              <h3>Knowledge Academy</h3>
+            </div>
+            <a href="#" class="live-button">Live Project</a>
+          </div>
+          <div class="project-gallery">
+            <div class="project-left">
+              <img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png&w=1280&q=85" alt="Knowledge Academy project preview" />
+              <img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png&w=1280&q=85" alt="Knowledge Academy mobile preview" />
+            </div>
+            <img class="project-tall" src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png&w=1280&q=85" alt="Knowledge Academy full preview" />
+          </div>
+        </article>
+
+        <article class="project-card" style="--i:1">
+          <div class="project-top">
+            <span class="project-number">02</span>
+            <div class="project-name">
+              <p>Business</p>
+              <h3>Nobel Packaging</h3>
+            </div>
+            <a href="#" class="live-button">Live Project</a>
+          </div>
+          <div class="project-gallery">
+            <div class="project-left">
+              <img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png&w=1280&q=85" alt="Nobel Packaging preview" />
+              <img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png&w=1280&q=85" alt="Nobel Packaging detail preview" />
+            </div>
+            <img class="project-tall" src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png&w=1280&q=85" alt="Nobel Packaging full preview" />
+          </div>
+        </article>
+
+        <article class="project-card" style="--i:2">
+          <div class="project-top">
+            <span class="project-number">03</span>
+            <div class="project-name">
+              <p>Personal</p>
+              <h3>AI Workflow System</h3>
+            </div>
+            <a href="#" class="live-button">Live Project</a>
+          </div>
+          <div class="project-gallery">
+            <div class="project-left">
+              <img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png&w=1280&q=85" alt="AI workflow preview" />
+              <img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png&w=1280&q=85" alt="AI workflow details" />
+            </div>
+            <img class="project-tall" src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png&w=1280&q=85" alt="AI workflow full preview" />
+          </div>
+        </article>
       </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <h2 class="hero-heading section-heading fade-in" data-y="40">Let&apos;s build</h2>
+      <p class="contact-copy fade-in" data-y="20">Send your project details, pages needed and preferred style. I will respond with a clear direction.</p>
+      <div class="contact-links fade-in" data-y="20" data-delay="0.15">
+        <a class="contact-button magnet" href="mailto:abdullahqayyum622@gmail.com">Email Me</a>
+        <a class="live-button" href="https://github.com/abdullahqayyum622-netizen" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="live-button" href="https://wa.me/923000000000" target="_blank" rel="noreferrer">WhatsApp</a>
+      </div>
+      <footer>© 2026 Abdullah Qayyum. AI Engineer & Web Developer.</footer>
     </section>
   </main>
-
-  <footer class="footer">
-    <p>© 2026 Abdullah Qayyum. Built with focus, clarity and motion.</p>
-  </footer>
 
   <script src="script.js"></script>
 </body>
