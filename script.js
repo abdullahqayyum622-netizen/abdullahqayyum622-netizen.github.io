@@ -1,6 +1,139 @@
-const menuToggle=document.querySelector('.menu-toggle');const navLinks=document.querySelector('.nav-links');menuToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));document.querySelectorAll('.nav-links a').forEach(link=>link.addEventListener('click',()=>navLinks.classList.remove('open')));
-const glow=document.querySelector('.cursor-glow');window.addEventListener('mousemove',e=>{glow.style.left=`${e.clientX}px`;glow.style.top=`${e.clientY}px`});
-const observer=new IntersectionObserver(entries=>{entries.forEach((entry,i)=>{if(entry.isIntersecting){entry.target.style.transitionDelay=`${Math.min(i*70,260)}ms`;entry.target.classList.add('visible')}})},{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-document.querySelectorAll('.tilt-card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const x=e.clientX-r.left;const y=e.clientY-r.top;const rx=((y/r.height)-.5)*-12;const ry=((x/r.width)-.5)*12;card.style.transform=`perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`});card.addEventListener('mouseleave',()=>{card.style.transform='perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)'})});
-document.querySelectorAll('.magnetic').forEach(btn=>{btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.15}px,${(e.clientY-r.top-r.height/2)*.25}px)`});btn.addEventListener('mouseleave',()=>btn.style.transform='translate(0,0)')});
-const canvas=document.getElementById('space');const ctx=canvas.getContext('2d');let w,h,particles=[];function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight;particles=Array.from({length:Math.min(110,Math.floor(w*h/14000))},()=>({x:Math.random()*w,y:Math.random()*h,z:Math.random()*1+.2,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.7+.4}))}resize();addEventListener('resize',resize);let mouse={x:w/2,y:h/2};addEventListener('mousemove',e=>mouse={x:e.clientX,y:e.clientY});function draw(){ctx.clearRect(0,0,w,h);particles.forEach((p,i)=>{p.x+=p.vx*p.z;p.y+=p.vy*p.z;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;const dx=mouse.x-p.x,dy=mouse.y-p.y,d=Math.sqrt(dx*dx+dy*dy);if(d<150){p.x-=dx*.002;p.y-=dy*.002}ctx.beginPath();ctx.arc(p.x,p.y,p.r*p.z,0,Math.PI*2);ctx.fillStyle='rgba(186,230,253,.72)';ctx.fill();for(let j=i+1;j<particles.length;j++){const q=particles[j];const dist=Math.hypot(p.x-q.x,p.y-q.y);if(dist<115){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(56,189,248,${(1-dist/115)*.16})`;ctx.stroke()}}});requestAnimationFrame(draw)}draw();
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.querySelectorAll('.nav-links a').forEach((link) => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cursorLight = document.querySelector('.cursor-light');
+
+if (cursorLight && !prefersReducedMotion) {
+  window.addEventListener('mousemove', (event) => {
+    cursorLight.style.left = `${event.clientX}px`;
+    cursorLight.style.top = `${event.clientY}px`;
+  });
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+
+if (!prefersReducedMotion) {
+  document.querySelectorAll('.tilt-card').forEach((card) => {
+    card.addEventListener('mousemove', (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const rotateX = ((y / rect.height) - 0.5) * -10;
+      const rotateY = ((x / rect.width) - 0.5) * 10;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+  });
+
+  document.querySelectorAll('.magnetic').forEach((button) => {
+    button.addEventListener('mousemove', (event) => {
+      const rect = button.getBoundingClientRect();
+      const x = (event.clientX - rect.left - rect.width / 2) * 0.12;
+      const y = (event.clientY - rect.top - rect.height / 2) * 0.18;
+      button.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    button.addEventListener('mouseleave', () => {
+      button.style.transform = 'translate(0, 0)';
+    });
+  });
+}
+
+const canvas = document.getElementById('bg-canvas');
+if (canvas && !prefersReducedMotion) {
+  const ctx = canvas.getContext('2d');
+  let width;
+  let height;
+  let particles = [];
+  let mouse = { x: 0, y: 0 };
+
+  function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    mouse = { x: width / 2, y: height / 2 };
+    const total = Math.min(95, Math.floor((width * height) / 16000));
+    particles = Array.from({ length: total }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.6 + 0.5,
+      speedX: (Math.random() - 0.5) * 0.32,
+      speedY: (Math.random() - 0.5) * 0.32,
+      depth: Math.random() * 0.9 + 0.35
+    }));
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach((particle, index) => {
+      particle.x += particle.speedX * particle.depth;
+      particle.y += particle.speedY * particle.depth;
+
+      if (particle.x < 0 || particle.x > width) particle.speedX *= -1;
+      if (particle.y < 0 || particle.y > height) particle.speedY *= -1;
+
+      const dx = mouse.x - particle.x;
+      const dy = mouse.y - particle.y;
+      const distance = Math.hypot(dx, dy);
+
+      if (distance < 140) {
+        particle.x -= dx * 0.0016;
+        particle.y -= dy * 0.0016;
+      }
+
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.radius * particle.depth, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(186, 230, 253, 0.72)';
+      ctx.fill();
+
+      for (let j = index + 1; j < particles.length; j += 1) {
+        const other = particles[j];
+        const linkDistance = Math.hypot(particle.x - other.x, particle.y - other.y);
+        if (linkDistance < 110) {
+          ctx.beginPath();
+          ctx.moveTo(particle.x, particle.y);
+          ctx.lineTo(other.x, other.y);
+          ctx.strokeStyle = `rgba(56, 189, 248, ${(1 - linkDistance / 110) * 0.15})`;
+          ctx.stroke();
+        }
+      }
+    });
+
+    requestAnimationFrame(drawParticles);
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('mousemove', (event) => {
+    mouse = { x: event.clientX, y: event.clientY };
+  });
+
+  resizeCanvas();
+  drawParticles();
+}

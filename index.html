@@ -3,150 +3,257 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Abdullah Qayyum, AI Engineer and Web Developer building responsive websites, AI workflows, landing pages and business websites." />
+  <meta name="theme-color" content="#08111f" />
   <title>Abdullah Qayyum | AI Engineer & Web Developer</title>
-  <meta name="description" content="Professional portfolio of Abdullah Qayyum, AI Engineer and Web Developer building modern websites, AI tools, automation workflows, and digital solutions." />
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="noise"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
-  <canvas id="space"></canvas>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="page-glow glow-one" aria-hidden="true"></div>
+  <div class="page-glow glow-two" aria-hidden="true"></div>
+  <div class="cursor-light" aria-hidden="true"></div>
 
   <header class="site-header">
-    <nav class="navbar">
-      <a href="#home" class="brand"><span>AQ</span> Abdullah</a>
-      <button class="menu-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
-      <div class="nav-links">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Abdullah Qayyum home">
+        <span>AQ</span>
+        <strong>Abdullah Qayyum</strong>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#services">Services</a>
         <a href="#projects">Projects</a>
-        <a href="#contact" class="nav-cta">Hire Me</a>
+        <a href="#contact" class="nav-button">Contact</a>
       </div>
     </nav>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero section" id="home">
-      <div class="hero-gradient"></div>
       <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <p class="eyebrow"><span></span> AI Engineer • Web Developer • Digital Builder</p>
-          <h1>Building premium websites with <em>AI-powered</em> thinking.</h1>
-          <p class="hero-text">I’m Abdullah Qayyum. I create fast, responsive and professional websites, automation workflows, and digital experiences that help businesses and personal brands look credible online.</p>
+        <div class="hero-content reveal">
+          <p class="eyebrow"><span></span> AI Engineer & Web Developer</p>
+          <h1>Modern websites with clean design, smart structure and smooth 3D motion.</h1>
+          <p class="hero-text">I build responsive portfolio websites, business websites, landing pages and AI-assisted workflows for people and brands that want a professional online presence.</p>
+
           <div class="hero-actions">
-            <a href="#projects" class="btn primary magnetic">Explore Work</a>
-            <a href="#contact" class="btn secondary magnetic">Start a Project</a>
+            <a href="#projects" class="btn btn-primary magnetic">View Work</a>
+            <a href="mailto:abdullahqayyum622@gmail.com" class="btn btn-secondary magnetic">Email Me</a>
           </div>
-          <div class="hero-metrics">
-            <div><strong>04+</strong><small>Featured Projects</small></div>
-            <div><strong>15+</strong><small>Core Skills</small></div>
-            <div><strong>3D</strong><small>Animated UI</small></div>
+
+          <div class="status-row" aria-label="Current focus areas">
+            <div><strong>Focus</strong><span>Websites & AI workflows</span></div>
+            <div><strong>Style</strong><span>Clean, fast, responsive</span></div>
+            <div><strong>Location</strong><span>Pakistan • Remote</span></div>
           </div>
         </div>
 
-        <div class="hero-stage reveal">
-          <div class="orbit orbit-one"></div>
-          <div class="orbit orbit-two"></div>
-          <div class="profile-3d tilt-card">
-            <div class="photo-ring">
-              <img src="https://github.com/abdullahqayyum622-netizen.png" alt="Abdullah Qayyum profile photo" />
+        <div class="hero-visual reveal" aria-label="Profile visual section">
+          <div class="orbit orbit-large"></div>
+          <div class="orbit orbit-small"></div>
+
+          <article class="profile-card tilt-card">
+            <div class="profile-top">
+              <div class="profile-image-wrap">
+                <img class="profile-image" src="assets/profile.jpg" alt="Abdullah Qayyum profile photo" onerror="this.onerror=null;this.src='https://github.com/abdullahqayyum622-netizen.png';" />
+              </div>
+              <div>
+                <p>Available for projects</p>
+                <span></span>
+              </div>
             </div>
-            <div class="profile-info">
-              <h2>Abdullah Qayyum</h2>
-              <p>AI Engineer & Web Developer</p>
+            <h2>Abdullah Qayyum</h2>
+            <p class="profile-role">AI Engineer • Web Developer • Digital Builder</p>
+            <div class="profile-tags">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>WordPress</span><span>AI Tools</span>
             </div>
-            <div class="profile-stack">
-              <span>React</span><span>AI Tools</span><span>WordPress</span>
-            </div>
-          </div>
+          </article>
+
           <div class="cube-scene" aria-hidden="true">
             <div class="cube">
-              <span class="front">AI</span><span class="back">UX</span><span class="right">3D</span><span class="left">WEB</span><span class="top">SEO</span><span class="bottom">DEV</span>
+              <span class="face front">WEB</span>
+              <span class="face back">AI</span>
+              <span class="face right">UX</span>
+              <span class="face left">SEO</span>
+              <span class="face top">UI</span>
+              <span class="face bottom">DEV</span>
             </div>
           </div>
-          <div class="glass-chip chip-a">Clean UI</div>
-          <div class="glass-chip chip-b">Fast Websites</div>
-          <div class="glass-chip chip-c">Smart Automation</div>
+
+          <div class="floating-card float-one">Responsive Design</div>
+          <div class="floating-card float-two">AI Workflows</div>
+          <div class="floating-card float-three">Fast Loading</div>
         </div>
       </div>
     </section>
 
-    <section class="section about-section" id="about">
-      <div class="container split">
-        <div class="section-heading reveal">
-          <p class="eyebrow"><span></span> About Me</p>
-          <h2>I design websites that feel modern, trustworthy and easy to use.</h2>
+    <section class="section about" id="about">
+      <div class="container two-col">
+        <div class="section-title reveal">
+          <p class="eyebrow"><span></span> About</p>
+          <h2>A practical developer focused on websites that look good and make sense.</h2>
         </div>
-        <div class="about-panel reveal tilt-card">
-          <p>I am an AI Engineer and Web Developer focused on building clean, business-ready digital products. My work combines frontend development, AI tools, automation, content strategy, and practical design thinking.</p>
-          <p>I care about real outcomes: fast loading, strong first impression, mobile responsiveness, clear messaging, and a website structure that supports growth.</p>
-          <div class="about-list"><span>Modern UI</span><span>Responsive Design</span><span>AI Workflows</span><span>Business Websites</span></div>
+        <div class="glass-panel reveal tilt-card">
+          <p>I work on modern, responsive websites with clear sections, strong visuals, clean copy and smooth user experience. My focus is not only design, but also how the website explains the service, builds trust and makes it easy for visitors to take action.</p>
+          <p>I also use AI tools for planning, content structure, research, automation and faster creative workflows.</p>
+          <div class="mini-list">
+            <span>Portfolio websites</span>
+            <span>Business websites</span>
+            <span>Landing pages</span>
+            <span>AI-assisted workflows</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section skills-section" id="skills">
+    <section class="section skills" id="skills">
       <div class="container">
-        <div class="center-heading reveal"><p class="eyebrow"><span></span> Skills</p><h2>Technology and creative tools I work with</h2></div>
+        <div class="center-title reveal">
+          <p class="eyebrow"><span></span> Skills</p>
+          <h2>Tools and technologies I use</h2>
+        </div>
       </div>
-      <div class="marquee reveal"><div class="marquee-track">
-        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React.js</span><span>Tailwind CSS</span><span>Vite</span><span>Three.js</span><span>WordPress</span><span>GitHub</span><span>ChatGPT</span><span>Gemini</span><span>Canva</span><span>SEO</span><span>Automation</span>
-        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React.js</span><span>Tailwind CSS</span><span>Vite</span><span>Three.js</span><span>WordPress</span><span>GitHub</span><span>ChatGPT</span><span>Gemini</span><span>Canva</span><span>SEO</span><span>Automation</span>
-      </div></div>
-      <div class="container skill-cards">
-        <article class="skill-card reveal tilt-card"><strong>Frontend</strong><p>Responsive layouts, animations, clean components and modern UI systems.</p></article>
-        <article class="skill-card reveal tilt-card"><strong>AI Workflows</strong><p>Using AI tools to speed up content, research, design and automation tasks.</p></article>
-        <article class="skill-card reveal tilt-card"><strong>Brand Websites</strong><p>Professional pages for businesses, academies, creators and service brands.</p></article>
+
+      <div class="marquee reveal" aria-label="Skills marquee">
+        <div class="marquee-track">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React.js</span><span>Vite</span><span>Tailwind CSS</span><span>WordPress</span><span>GitHub</span><span>SEO Basics</span><span>ChatGPT</span><span>Gemini</span><span>Canva</span><span>Automation</span><span>Content Strategy</span>
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React.js</span><span>Vite</span><span>Tailwind CSS</span><span>WordPress</span><span>GitHub</span><span>SEO Basics</span><span>ChatGPT</span><span>Gemini</span><span>Canva</span><span>Automation</span><span>Content Strategy</span>
+        </div>
+      </div>
+
+      <div class="container skill-grid">
+        <article class="skill-card reveal tilt-card"><span>01</span><h3>Frontend Development</h3><p>Responsive layouts, clean sections, reusable components and smooth UI interactions.</p></article>
+        <article class="skill-card reveal tilt-card"><span>02</span><h3>AI & Automation</h3><p>AI-assisted workflows for content, planning, research and repetitive business tasks.</p></article>
+        <article class="skill-card reveal tilt-card"><span>03</span><h3>Digital Presence</h3><p>Portfolio, academy, brand and service websites designed to look credible and easy to understand.</p></article>
       </div>
     </section>
 
-    <section class="section" id="services">
+    <section class="section services" id="services">
       <div class="container">
-        <div class="center-heading reveal"><p class="eyebrow"><span></span> Services</p><h2>Premium digital services for a stronger online presence</h2></div>
+        <div class="center-title reveal">
+          <p class="eyebrow"><span></span> Services</p>
+          <h2>What I can build</h2>
+        </div>
         <div class="service-grid">
-          <article class="service-card reveal tilt-card"><b>01</b><h3>Portfolio Websites</h3><p>Personal websites that present your skills, story, work and contact details professionally.</p></article>
-          <article class="service-card reveal tilt-card"><b>02</b><h3>Business Websites</h3><p>Modern websites for academies, companies, startups and service-based businesses.</p></article>
-          <article class="service-card reveal tilt-card"><b>03</b><h3>Landing Pages</h3><p>High-impact pages for campaigns, offers, launches and lead generation.</p></article>
-          <article class="service-card reveal tilt-card"><b>04</b><h3>AI Automation</h3><p>Smarter workflows for content creation, research, planning and repetitive tasks.</p></article>
-          <article class="service-card reveal tilt-card"><b>05</b><h3>WordPress Websites</h3><p>Editable and professional WordPress websites with clean structure and branding.</p></article>
-          <article class="service-card reveal tilt-card"><b>06</b><h3>Website Redesign</h3><p>Turning outdated websites into modern, reliable and mobile-friendly experiences.</p></article>
+          <article class="service-card reveal tilt-card"><span>01</span><h3>Portfolio Website</h3><p>A professional personal website with your story, skills, services, projects and contact details.</p></article>
+          <article class="service-card reveal tilt-card"><span>02</span><h3>Business Website</h3><p>A clean website for companies, academies, startups and service-based businesses.</p></article>
+          <article class="service-card reveal tilt-card"><span>03</span><h3>Landing Page</h3><p>A focused page for campaigns, offers, launches and lead collection.</p></article>
+          <article class="service-card reveal tilt-card"><span>04</span><h3>WordPress Website</h3><p>An editable website with professional layout, product/service sections and clear CTAs.</p></article>
+          <article class="service-card reveal tilt-card"><span>05</span><h3>Website Redesign</h3><p>Improving old websites with better spacing, typography, mobile layout and user flow.</p></article>
+          <article class="service-card reveal tilt-card"><span>06</span><h3>AI Workflow Setup</h3><p>Practical AI workflows for content creation, research, planning and everyday digital work.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section projects-section" id="projects">
+    <section class="section projects" id="projects">
       <div class="container">
-        <div class="center-heading reveal"><p class="eyebrow"><span></span> Projects</p><h2>Selected projects and digital work</h2></div>
+        <div class="center-title reveal">
+          <p class="eyebrow"><span></span> Projects</p>
+          <h2>Selected work examples</h2>
+          <p class="section-note">These are portfolio case-study cards. Replace the buttons with live links when each project is published.</p>
+        </div>
+
         <div class="project-grid">
-          <article class="project-card reveal tilt-card"><div class="project-top"><span>KA</span><small>Academy Website</small></div><h3>Knowledge Academy Website</h3><p>A modern academy website with animated sections, course presentation, professional layout and responsive design.</p><div class="tech"><span>Vite</span><span>Three.js</span><span>CSS</span></div><a href="#contact">Discuss Similar Project</a></article>
-          <article class="project-card reveal tilt-card"><div class="project-top"><span>NP</span><small>Business Website</small></div><h3>Nobel Packaging Website</h3><p>A corporate packaging website structure with products, services, branding, and clear business messaging.</p><div class="tech"><span>WordPress</span><span>Branding</span><span>SEO</span></div><a href="#contact">Discuss Similar Project</a></article>
-          <article class="project-card reveal tilt-card"><div class="project-top"><span>LI</span><small>Personal Brand</small></div><h3>LinkedIn Portfolio Design</h3><p>A clean personal branding concept designed to build trust and present services professionally.</p><div class="tech"><span>Canva</span><span>Design</span><span>Content</span></div><a href="#contact">Discuss Similar Project</a></article>
-          <article class="project-card reveal tilt-card"><div class="project-top"><span>AI</span><small>Automation</small></div><h3>AI Tools Workflow</h3><p>A workflow using ChatGPT, Gemini, Canva and automation tools to speed up creative and business tasks.</p><div class="tech"><span>AI</span><span>Automation</span><span>Workflow</span></div><a href="#contact">Discuss Similar Project</a></article>
+          <article class="project-card reveal tilt-card">
+            <div class="project-preview academy"><span>KA</span></div>
+            <div class="project-body">
+              <p class="project-type">Academy website</p>
+              <h3>Knowledge Academy Website</h3>
+              <p>A responsive academy website concept with course sections, strong visual presentation and smooth animations.</p>
+              <div class="tech-list"><span>Vite</span><span>CSS</span><span>Animation</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal tilt-card">
+            <div class="project-preview packaging"><span>NP</span></div>
+            <div class="project-body">
+              <p class="project-type">Business website</p>
+              <h3>Nobel Packaging Website</h3>
+              <p>A business website structure for packaging products, services, company profile and inquiry-focused sections.</p>
+              <div class="tech-list"><span>WordPress</span><span>Branding</span><span>SEO</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal tilt-card">
+            <div class="project-preview linkedin"><span>LI</span></div>
+            <div class="project-body">
+              <p class="project-type">Personal brand</p>
+              <h3>LinkedIn Portfolio Design</h3>
+              <p>A clean personal-branding layout designed to present skills, services and credibility in a professional way.</p>
+              <div class="tech-list"><span>Canva</span><span>UI</span><span>Content</span></div>
+            </div>
+          </article>
+
+          <article class="project-card reveal tilt-card">
+            <div class="project-preview ai"><span>AI</span></div>
+            <div class="project-body">
+              <p class="project-type">Workflow</p>
+              <h3>AI Tools Workflow</h3>
+              <p>A practical workflow using AI tools to speed up research, captions, planning, design ideas and business content.</p>
+              <div class="tech-list"><span>ChatGPT</span><span>Gemini</span><span>Automation</span></div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section process-section"><div class="container"><div class="center-heading reveal"><p class="eyebrow"><span></span> Process</p><h2>How I turn an idea into a professional website</h2></div><div class="timeline">
-      <div class="timeline-item reveal"><span>01</span><h3>Understand</h3><p>First, I understand your goal, audience, services and brand style.</p></div>
-      <div class="timeline-item reveal"><span>02</span><h3>Design</h3><p>Then I create a clean layout with strong sections and professional visuals.</p></div>
-      <div class="timeline-item reveal"><span>03</span><h3>Build</h3><p>The website is developed with responsive design, animations and smooth user flow.</p></div>
-      <div class="timeline-item reveal"><span>04</span><h3>Launch</h3><p>Finally, I prepare it for GitHub Pages, hosting, SEO basics and future updates.</p></div>
-    </div></div></section>
+    <section class="section process">
+      <div class="container">
+        <div class="center-title reveal">
+          <p class="eyebrow"><span></span> Process</p>
+          <h2>How I work on a website</h2>
+        </div>
+        <div class="process-grid">
+          <div class="process-step reveal"><span>01</span><h3>Plan</h3><p>Understand the goal, audience, services, pages and website style.</p></div>
+          <div class="process-step reveal"><span>02</span><h3>Design</h3><p>Create a professional structure with clean sections and clear messaging.</p></div>
+          <div class="process-step reveal"><span>03</span><h3>Build</h3><p>Develop the responsive website with animations and smooth navigation.</p></div>
+          <div class="process-step reveal"><span>04</span><h3>Launch</h3><p>Prepare files for GitHub Pages or hosting, test mobile layout and check links.</p></div>
+        </div>
+      </div>
+    </section>
 
-    <section class="section contact-section" id="contact">
+    <section class="section contact" id="contact">
       <div class="container contact-grid">
-        <div class="section-heading reveal"><p class="eyebrow"><span></span> Contact</p><h2>Let’s build something that looks serious and works smoothly.</h2><p class="contact-text">Need a portfolio, business website, landing page or AI-powered workflow? Send a message and I’ll get back to you.</p><div class="contact-info"><a href="mailto:abdullahqayyum622@gmail.com">abdullahqayyum622@gmail.com</a><a href="https://github.com/abdullahqayyum622-netizen" target="_blank" rel="noreferrer">github.com/abdullahqayyum622-netizen</a></div></div>
-        <form class="contact-form reveal tilt-card" action="mailto:abdullahqayyum622@gmail.com" method="post" enctype="text/plain"><label>Name<input type="text" name="name" placeholder="Your name" required></label><label>Email<input type="email" name="email" placeholder="Your email" required></label><label>Project Details<textarea name="message" rows="5" placeholder="Tell me what you want to build" required></textarea></label><button class="btn primary magnetic" type="submit">Send Message</button></form>
+        <div class="section-title reveal">
+          <p class="eyebrow"><span></span> Contact</p>
+          <h2>Have a website idea? Let’s discuss it.</h2>
+          <p class="contact-copy">Send an email with your project details, pages needed and preferred style. I’ll respond with a clear direction.</p>
+          <div class="contact-links">
+            <a href="mailto:abdullahqayyum622@gmail.com">abdullahqayyum622@gmail.com</a>
+            <a href="https://github.com/abdullahqayyum622-netizen" target="_blank" rel="noreferrer">GitHub Profile</a>
+          </div>
+        </div>
+
+        <form class="contact-form reveal tilt-card" action="https://formsubmit.co/abdullahqayyum622@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New portfolio website inquiry" />
+          <input type="hidden" name="_captcha" value="false" />
+          <label>Name<input type="text" name="name" placeholder="Your name" required /></label>
+          <label>Email<input type="email" name="email" placeholder="Your email" required /></label>
+          <label>Message<textarea name="message" rows="5" placeholder="Tell me about your project" required></textarea></label>
+          <button class="btn btn-primary magnetic" type="submit">Send Message</button>
+          <p class="form-note">The form uses FormSubmit. On first use, you may need to confirm your email once.</p>
+        </form>
       </div>
     </section>
   </main>
-  <footer class="footer"><p>© 2026 Abdullah Qayyum. Built with HTML, CSS, JavaScript and 3D animations.</p></footer>
+
+  <footer class="footer">
+    <p>© 2026 Abdullah Qayyum. All rights reserved.</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
