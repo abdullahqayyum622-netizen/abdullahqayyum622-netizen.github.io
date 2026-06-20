@@ -1,13 +1,18 @@
 # Abdullah Qayyum Portfolio
 
-A modern static portfolio website for Abdullah Qayyum, AI Engineer and Web Developer.
+A next-level professional 3D animated portfolio website for Abdullah Qayyum, AI Engineer and Web Developer.
+
+## Features
+- 3D animated hero card
+- Rotating 3D cube
+- Interactive particle background
+- Scroll reveal animations
+- 3D card tilt effects
+- Animated skills marquee
+- Responsive mobile design
+- GitHub Pages ready
 
 ## Files
 - `index.html`
 - `style.css`
 - `script.js`
-
-## Deploy on GitHub Pages
-1. Create a public GitHub repository named `abdullahqayyum622-netizen.github.io`.
-2. Upload these files to the root of the repository.
-3. Open `https://abdullahqayyum622-netizen.github.io` after GitHub Pages publishes it.
