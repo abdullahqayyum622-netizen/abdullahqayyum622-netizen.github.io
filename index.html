@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Muhammad Abdullah Qayyum — AI Engineer and Automation Specialist building full-stack websites, AI automation workflows, business websites, and digital systems for growing brands." />
-  <meta name="theme-color" content="#07111f" />
-  <meta property="og:title" content="Muhammad Abdullah Qayyum — AI Engineer & Automation Specialist" />
-  <meta property="og:description" content="Professional portfolio of Muhammad Abdullah Qayyum: AI automation, full-stack development, websites, n8n workflows, SEO, and digital strategy." />
-  <meta property="og:type" content="website" />
-  <title>Muhammad Abdullah Qayyum — AI Engineer & Automation Specialist</title>
-
+  <meta name="description" content="Abdullah Qayyum — AI Engineer and Web Developer building premium websites, AI workflows, landing pages, and business websites including Royal Orchard Restaurant Chakwal." />
+  <meta name="theme-color" content="#07080d" />
+  <title>Abdullah Qayyum — AI Engineer & Web Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -17,327 +13,191 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-  <canvas id="gridCanvas" aria-hidden="true"></canvas>
-  <div class="cursor-orb" id="cursorOrb" aria-hidden="true"></div>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+  <div class="cursor-glow" aria-hidden="true"></div>
 
   <header class="site-header" id="siteHeader">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="#home" aria-label="Muhammad Abdullah Qayyum home">
-        <span class="brand-mark">MAQ</span>
-        <span class="brand-text">Muhammad Abdullah Qayyum</span>
+    <nav class="nav-shell" aria-label="Main navigation">
+      <a href="#home" class="brand-pill" aria-label="Abdullah Qayyum home">
+        <span class="brand-mark">AQ</span>
+        <span>Abdullah Qayyum</span>
       </a>
 
-      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false">
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span>
       </button>
 
       <div class="nav-links" id="navLinks">
-        <a href="#work">Work</a>
-        <a href="#skills">Skills</a>
-        <a href="#systems">Systems</a>
+        <a href="#about">Story</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
         <a href="#process">Process</a>
-        <a href="#contact" class="nav-cta">Let’s talk</a>
-      </div>
-
-      <div class="nav-actions">
-        <button class="command-btn" id="commandOpen" type="button" aria-label="Open quick actions">⌘K</button>
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">
-          <span></span>
-        </button>
+        <a href="#contact" class="nav-cta">Contact</a>
       </div>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero section" id="home">
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <div class="availability-chip"><span></span> Available for AI automation & website projects</div>
-          <h1>AI automation, full-stack websites and digital systems that help businesses work smarter.</h1>
-          <p class="hero-lead">I build AI automation workflows, full-stack websites and business-focused digital systems for brands that want to save time, improve operations and grow with a stronger online presence.</p>
+    <section class="hero-section" id="home">
+      <video class="hero-video" autoplay loop muted playsinline poster="" aria-hidden="true">
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260618_174853_aac61aa2-0f3f-4cf1-bc78-7f657dd11164.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-gradient" aria-hidden="true"></div>
+      <div class="hero-noise" aria-hidden="true"></div>
 
-          <div class="type-row" aria-label="Current focus">
-            <span>I can help with</span>
-            <strong id="typedText">portfolio websites</strong>
-          </div>
-
-          <div class="hero-actions">
-            <a href="#work" class="btn btn-primary magnetic">View Case Studies</a>
-            <a href="mailto:kaforgeagency@gmail.com" class="btn btn-secondary magnetic">Email Me</a>
-            <a href="assets/muhammad-abdullah-qayyum-cv.pdf" class="btn btn-ghost magnetic" download>Download CV</a>
-          </div>
-
-          <div class="hero-proof" aria-label="Portfolio highlights">
-            <div class="proof-card"><strong>95%</strong><span>AI automation skill</span></div>
-            <div class="proof-card"><strong>90%</strong><span>Full-stack development</span></div>
-            <div class="proof-card"><strong>Chakwal</strong><span>Pakistan • Remote</span></div>
-          </div>
+      <div class="hero-content">
+        <div class="hero-top reveal">
+          <p class="eyebrow"><span></span> AI Engineer • Web Developer • Digital Builder</p>
+          <div class="availability"><span></span> Available for selected projects</div>
         </div>
 
-        <div class="hero-visual reveal" aria-label="Portfolio visual preview">
-          <div class="visual-stage tilt-card">
-            <div class="profile-panel glass-panel">
-              <div class="profile-head">
-                <img src="assets/profile.jpg" alt="Muhammad Abdullah Qayyum profile photo" onerror="this.onerror=null;this.src='https://github.com/abdullahqayyum622-netizen.png';" />
-                <div>
-                  <p>AI Engineer & Automation Specialist</p>
-                  <h2>Muhammad Abdullah Qayyum</h2>
-                </div>
-              </div>
-              <div class="status-line"><span></span> Chakwal, Pakistan • AI automation & web systems</div>
-            </div>
-
-            <div class="code-panel glass-panel">
-              <div class="panel-dots"><span></span><span></span><span></span></div>
-              <pre><code>const portfolio = {
-  stack: ['n8n', 'JS', 'React', 'WordPress'],
-  focus: 'AI automation + full-stack builds',
-  goal: 'save time and scale operations'
-}</code></pre>
-            </div>
-
-            <div class="audit-panel glass-panel">
-              <p>Website Quality</p>
-              <div class="score-ring"><span>96</span></div>
-              <small>Responsive • SEO • Accessible</small>
-            </div>
-
-            <div class="system-panel glass-panel">
-              <span>AI workflow</span>
-              <ol>
-                <li>Research</li>
-                <li>Content structure</li>
-                <li>Design direction</li>
-                <li>Launch checklist</li>
-              </ol>
+        <div class="hero-bottom">
+          <div class="hero-copy reveal">
+            <h1>Building digital experiences that feel premium, fast and useful.</h1>
+            <p>I design and build modern websites, landing pages, business sites and AI-assisted workflows for brands that want a clean, trustworthy online presence.</p>
+            <div class="hero-actions">
+              <a class="btn btn-light magnetic" href="#projects">Explore Work</a>
+              <a class="btn btn-glass magnetic" href="mailto:abdullahqayyum622@gmail.com">Start a Project</a>
+              <a class="btn btn-ghost magnetic" href="assets/abdullah-qayyum-cv.pdf" download>Download CV</a>
             </div>
           </div>
+
+          <aside class="hero-card reveal tilt-card" aria-label="Profile summary card">
+            <div class="profile-orbit" aria-hidden="true"></div>
+            <div class="profile-photo-wrap">
+              <img src="assets/profile.jpg" alt="Abdullah Qayyum profile photo" onerror="this.onerror=null;this.src='https://github.com/abdullahqayyum622-netizen.png';" />
+            </div>
+            <div>
+              <p class="card-label">Portfolio</p>
+              <h2>Abdullah Qayyum</h2>
+              <p class="card-role">AI Engineer & Web Developer</p>
+            </div>
+            <div class="metric-grid">
+              <div><strong>10+</strong><span>Website concepts</span></div>
+              <div><strong>20+</strong><span>Digital projects</span></div>
+            </div>
+            <div class="profile-tags">
+              <span>React</span><span>WordPress</span><span>AI Tools</span><span>SEO</span>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <section class="logo-strip" aria-label="Core services">
-      <div class="strip-track">
-        <span>Frontend Development</span><span>AI Workflows</span><span>WordPress Websites</span><span>Landing Pages</span><span>Responsive UI</span><span>SEO Structure</span><span>GitHub Pages</span><span>Automation</span>
-        <span>Frontend Development</span><span>AI Workflows</span><span>WordPress Websites</span><span>Landing Pages</span><span>Responsive UI</span><span>SEO Structure</span><span>GitHub Pages</span><span>Automation</span>
-      </div>
-    </section>
-
-    <section class="section intro-section" id="systems">
-      <div class="container split-grid">
-        <div class="section-heading reveal">
-          <p class="kicker">Professional direction</p>
-          <h2>A practical portfolio built around real skills, automation and business results.</h2>
+    <section class="marquee-section" aria-label="Skills and focus areas">
+      <div class="marquee-row">
+        <div class="marquee-track">
+          <span>Web Development</span><span>AI Workflows</span><span>Landing Pages</span><span>WordPress</span><span>React</span><span>Brand Websites</span><span>SEO Structure</span><span>3D Motion</span>
+          <span>Web Development</span><span>AI Workflows</span><span>Landing Pages</span><span>WordPress</span><span>React</span><span>Brand Websites</span><span>SEO Structure</span><span>3D Motion</span>
         </div>
-        <div class="intro-copy reveal">
-          <p>I work across AI automation, n8n workflows, full-stack development, web development, SEO, digital marketing, and social media strategy. My goal is to build systems that are useful, easy to understand, and practical for real businesses.</p>
-          <div class="principles-grid">
-            <article><strong>01</strong><span>AI automation</span></article>
-            <article><strong>02</strong><span>Full-stack development</span></article>
-            <article><strong>03</strong><span>Digital strategy</span></article>
-            <article><strong>04</strong><span>Business process optimization</span></article>
-          </div>
+      </div>
+      <div class="marquee-row reverse">
+        <div class="marquee-track">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Tailwind</span><span>GitHub</span><span>Canva</span><span>ChatGPT</span><span>Automation</span>
+          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Tailwind</span><span>GitHub</span><span>Canva</span><span>ChatGPT</span><span>Automation</span>
         </div>
       </div>
     </section>
 
-    <section class="section credentials-section" id="credentials">
+    <section class="section about-section" id="about">
+      <div class="container about-grid">
+        <div class="section-kicker reveal">Story</div>
+        <div class="about-copy reveal">
+          <h2>I create websites that explain your work clearly and make people trust your brand.</h2>
+          <p>My focus is simple: strong visual direction, clear sections, smooth interactions and practical user flow. I combine web design, frontend development and AI-assisted planning to build websites that look professional and feel easy to use.</p>
+        </div>
+      </div>
+      <div class="floating-shape shape-one" aria-hidden="true">AI</div>
+      <div class="floating-shape shape-two" aria-hidden="true">UX</div>
+    </section>
+
+    <section class="section services-section" id="services">
       <div class="container">
-        <div class="section-heading center reveal">
-          <p class="kicker">CV snapshot</p>
-          <h2>Experience, education and certifications.</h2>
+        <div class="title-row reveal">
+          <p class="section-kicker">Services</p>
+          <h2>What I can build for you</h2>
         </div>
-        <div class="credentials-grid">
-          <article class="credential-card reveal tilt-card">
-            <span>Experience</span>
-            <h3>KAForge Agency</h3>
-            <p><strong>AI Engineer</strong> · 2025 — Present</p>
-            <ul>
-              <li>Develop AI automation solutions using n8n and custom workflows.</li>
-              <li>Build web applications and AI-powered systems.</li>
-              <li>Help businesses automate operations and lead generation.</li>
-            </ul>
+        <div class="service-list">
+          <article class="service-item reveal">
+            <span>01</span>
+            <div><h3>Portfolio Websites</h3><p>Professional personal websites with story, skills, services, projects, proof and contact flow.</p></div>
           </article>
-          <article class="credential-card reveal tilt-card">
-            <span>Experience</span>
-            <h3>Integrated Media Solutions</h3>
-            <p><strong>Social Media Strategist</strong> · 2024 — 2025</p>
-            <ul>
-              <li>Managed multi-platform social media campaigns.</li>
-              <li>Increased engagement and audience growth.</li>
-              <li>Led content strategy for multiple brands.</li>
-            </ul>
+          <article class="service-item reveal">
+            <span>02</span>
+            <div><h3>Business Websites</h3><p>Clean company websites for academies, startups, service businesses and local brands.</p></div>
           </article>
-          <article class="credential-card reveal tilt-card">
-            <span>Education</span>
-            <h3>University of Chakwal</h3>
-            <p><strong>BBA</strong> · 2025 — Present</p>
-            <p>Intermediate in ICS · 2025</p>
+          <article class="service-item reveal">
+            <span>03</span>
+            <div><h3>Landing Pages</h3><p>Focused campaign pages designed around clarity, trust and lead generation.</p></div>
           </article>
-          <article class="credential-card reveal tilt-card">
-            <span>Certifications</span>
-            <h3>Professional Learning</h3>
-            <ul>
-              <li>AI Engineering Certificate</li>
-              <li>Google Digital Marketing Certificate</li>
-              <li>Meta Social Media Marketing</li>
-              <li>HubSpot Content Marketing</li>
-            </ul>
+          <article class="service-item reveal">
+            <span>04</span>
+            <div><h3>AI Workflow Setup</h3><p>Practical AI workflows for content planning, research, captions, automation and digital operations.</p></div>
+          </article>
+          <article class="service-item reveal">
+            <span>05</span>
+            <div><h3>Website Redesign</h3><p>Upgrading old websites with better layout, typography, mobile experience and calls to action.</p></div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section work-section" id="work">
-      <div class="container">
-        <div class="section-top reveal">
-          <div>
-            <p class="kicker">Selected work</p>
-            <h2>Real and selected work that shows practical skills.</h2>
-          </div>
-          <div class="filters" role="list" aria-label="Project filters">
-            <button class="filter-btn active" data-filter="all" type="button">All</button>
-            <button class="filter-btn" data-filter="web" type="button">Web</button>
-            <button class="filter-btn" data-filter="ai" type="button">AI</button>
-            <button class="filter-btn" data-filter="brand" type="button">Brand</button>
+    <section class="section featured-section">
+      <div class="container featured-card reveal tilt-card">
+        <div class="featured-text">
+          <p class="section-kicker">Featured case study</p>
+          <h2>Royal Orchard Restaurant Chakwal</h2>
+          <p>A professional restaurant website built for Royal Orchard Restaurant Chakwal with a clean brand presentation, menu-focused layout, location details, mobile-friendly sections and clear contact flow for customers.</p>
+          <div class="project-meta">
+            <span>Restaurant Website</span><span>Menu Layout</span><span>Mobile Responsive</span><span>Contact Flow</span>
           </div>
         </div>
-
-        <div class="case-grid">
-          <article class="case-card reveal tilt-card" data-category="web" data-project="royalOrchard">
-            <div class="case-media royal-media">
-              <span>Royal Orchard</span>
-              <div class="restaurant-ui"><i></i><i></i><i></i></div>
-            </div>
-            <div class="case-body">
-              <p>Restaurant Website</p>
-              <h3>Royal Orchard Restaurant Chakwal</h3>
-              <span>A real restaurant website project focused on professional presentation, menu visibility, location details and easy customer contact.</span>
-              <div class="tag-row"><b>Restaurant</b><b>Responsive</b><b>Business Website</b></div>
-              <button class="case-link" type="button">View details →</button>
-            </div>
-          </article>
-
-          <article class="case-card reveal tilt-card" data-category="web" data-project="academy">
-            <div class="case-media academy-media">
-              <span>Knowledge Academy</span>
-              <div class="mini-browser"><i></i><i></i><i></i></div>
-            </div>
-            <div class="case-body">
-              <p>Academy Website</p>
-              <h3>Knowledge Academy Chakwal</h3>
-              <span>A professional academy website concept with course sections, parent-focused copy, clean navigation and inquiry flow.</span>
-              <div class="tag-row"><b>HTML/CSS</b><b>3D UI</b><b>Responsive</b></div>
-              <button class="case-link" type="button">View details →</button>
-            </div>
-          </article>
-
-          <article class="case-card reveal tilt-card" data-category="web" data-project="packaging">
-            <div class="case-media packaging-media">
-              <span>Nobel Packaging</span>
-              <div class="box-stack"><i></i><i></i><i></i></div>
-            </div>
-            <div class="case-body">
-              <p>Business Website</p>
-              <h3>Nobel Packaging</h3>
-              <span>Website structure for a packaging business with product categories, service pages, company profile and contact CTAs.</span>
-              <div class="tag-row"><b>WordPress</b><b>SEO</b><b>Catalog</b></div>
-              <button class="case-link" type="button">View details →</button>
-            </div>
-          </article>
-
-          <article class="case-card reveal tilt-card" data-category="ai" data-project="workflow">
-            <div class="case-media workflow-media">
-              <span>AI Content Workflow</span>
-              <div class="flow-nodes"><i></i><i></i><i></i><i></i></div>
-            </div>
-            <div class="case-body">
-              <p>AI Workflow</p>
-              <h3>Content & Research System</h3>
-              <span>A practical AI-assisted workflow for research, captions, planning, SEO, creative directions and daily content operations.</span>
-              <div class="tag-row"><b>ChatGPT</b><b>Gemini</b><b>Automation</b></div>
-              <button class="case-link" type="button">View details →</button>
-            </div>
-          </article>
-
-          <article class="case-card reveal tilt-card" data-category="brand" data-project="personalBrand">
-            <div class="case-media brand-media">
-              <span>LinkedIn Profile</span>
-              <div class="profile-lines"><i></i><i></i><i></i></div>
-            </div>
-            <div class="case-body">
-              <p>Personal Branding</p>
-              <h3>LinkedIn Portfolio Direction</h3>
-              <span>Clean profile positioning, banner direction, content strategy and presentation system for a more trustworthy digital profile.</span>
-              <div class="tag-row"><b>Content</b><b>Design</b><b>Positioning</b></div>
-              <button class="case-link" type="button">View details →</button>
-            </div>
-          </article>
+        <div class="featured-preview" aria-hidden="true">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <div class="preview-hero"></div>
+          <div class="preview-lines"><i></i><i></i><i></i></div>
         </div>
       </div>
     </section>
 
-    <section class="section skills-section" id="skills">
+    <section class="section projects-section" id="projects">
       <div class="container">
-        <div class="section-heading center reveal">
-          <p class="kicker">Skills matrix</p>
-          <h2>The stack behind the work.</h2>
+        <div class="title-row reveal">
+          <p class="section-kicker">Projects</p>
+          <h2>Selected work examples</h2>
         </div>
 
-        <div class="skills-grid">
-          <article class="skill-column reveal">
-            <h3>AI & Automation</h3>
-            <div class="skill-item"><span>AI Automation</span><b style="--level:95%"></b></div>
-            <div class="skill-item"><span>n8n Workflow Automation</span><b style="--level:95%"></b></div>
-            <div class="skill-item"><span>Prompt Systems</span><b style="--level:88%"></b></div>
-            <div class="skill-item"><span>Business Process Optimization</span><b style="--level:86%"></b></div>
+        <div class="sticky-projects">
+          <article class="project-panel reveal">
+            <div class="project-number">01</div>
+            <div class="project-info"><p>Restaurant website</p><h3>Royal Orchard Restaurant Chakwal</h3><span>A real restaurant website project with menu presentation, brand visuals, location details and a smooth customer inquiry flow.</span></div>
+            <div class="project-screen restaurant-screen"><b>RO</b></div>
           </article>
-          <article class="skill-column reveal">
-            <h3>Development</h3>
-            <div class="skill-item"><span>Full-Stack Development</span><b style="--level:90%"></b></div>
-            <div class="skill-item"><span>Web Development</span><b style="--level:90%"></b></div>
-            <div class="skill-item"><span>Responsive UI</span><b style="--level:90%"></b></div>
-            <div class="skill-item"><span>React / WordPress</span><b style="--level:84%"></b></div>
+          <article class="project-panel reveal">
+            <div class="project-number">02</div>
+            <div class="project-info"><p>Business website</p><h3>Nobel Packaging</h3><span>Packaging company website structure with product categories and inquiry flow.</span></div>
+            <div class="project-screen package-screen"><b>NP</b></div>
           </article>
-          <article class="skill-column reveal">
-            <h3>Digital Growth</h3>
-            <div class="skill-item"><span>Social Media Strategy</span><b style="--level:90%"></b></div>
-            <div class="skill-item"><span>Digital Marketing</span><b style="--level:85%"></b></div>
-            <div class="skill-item"><span>SEO</span><b style="--level:85%"></b></div>
-            <div class="skill-item"><span>Video Editing</span><b style="--level:80%"></b></div>
+          <article class="project-panel reveal">
+            <div class="project-number">03</div>
+            <div class="project-info"><p>Academy website</p><h3>Knowledge Academy</h3><span>Modern education website with trust-building sections, course details and smooth visuals.</span></div>
+            <div class="project-screen academy-screen"><b>KA</b></div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section engineering-section">
-      <div class="container engineering-card reveal">
-        <div>
-          <p class="kicker">Code quality</p>
-          <h2>Built like a real product page.</h2>
-          <p>Fast loading, accessible structure, responsive layout, reusable sections, readable code and no unnecessary complexity. The goal is a portfolio that clients can trust and developers can maintain.</p>
-        </div>
-        <div class="quality-grid">
-          <div><strong>SEO</strong><span>Meta tags, heading structure and descriptive content.</span></div>
-          <div><strong>Performance</strong><span>Lightweight CSS/JS with progressive effects.</span></div>
-          <div><strong>Responsive</strong><span>Mobile-first layout across all sections.</span></div>
-          <div><strong>UX</strong><span>Clear actions, readable copy and smooth navigation.</span></div>
         </div>
       </div>
     </section>
 
     <section class="section process-section" id="process">
       <div class="container">
-        <div class="section-heading center reveal">
-          <p class="kicker">Workflow</p>
-          <h2>How I take a project from idea to launch.</h2>
+        <div class="title-row reveal">
+          <p class="section-kicker">Process</p>
+          <h2>A simple, professional workflow</h2>
         </div>
-        <div class="timeline">
-          <article class="timeline-step reveal"><span>01</span><h3>Discovery</h3><p>Understand business goal, audience, pages, services and content direction.</p></article>
-          <article class="timeline-step reveal"><span>02</span><h3>Structure</h3><p>Plan sections, messaging, CTAs, visuals and trust-building elements.</p></article>
-          <article class="timeline-step reveal"><span>03</span><h3>Build</h3><p>Develop a responsive website with clean code, animations and clear navigation.</p></article>
-          <article class="timeline-step reveal"><span>04</span><h3>Launch</h3><p>Test links, mobile layout, speed, forms and publish to GitHub Pages or hosting.</p></article>
+        <div class="process-grid">
+          <div class="process-card reveal tilt-card"><span>01</span><h3>Discovery</h3><p>Understand your goal, audience, services, pages and visual direction.</p></div>
+          <div class="process-card reveal tilt-card"><span>02</span><h3>Structure</h3><p>Plan the sections, content flow, CTAs and trust-building elements.</p></div>
+          <div class="process-card reveal tilt-card"><span>03</span><h3>Design & Build</h3><p>Create the website with clean UI, responsive layout and smooth motion.</p></div>
+          <div class="process-card reveal tilt-card"><span>04</span><h3>Launch</h3><p>Test mobile, check links, improve speed and publish to hosting.</p></div>
         </div>
       </div>
     </section>
@@ -345,87 +205,44 @@
     <section class="section testimonials-section">
       <div class="container testimonials-grid">
         <article class="testimonial reveal tilt-card">
-          <p>“Abdullah is fast, creative and practical. He understands how to make a digital profile look professional without making it confusing.”</p>
-          <strong>Website project feedback</strong>
+          <p>“Abdullah understands how to turn a rough idea into a clean digital presence. The website structure was clear and professional.”</p>
+          <strong>Client feedback</strong>
         </article>
         <article class="testimonial reveal tilt-card">
-          <p>“The best part was the structure. The sections were clear, the copy made sense, and the design felt trustworthy.”</p>
-          <strong>Client-style review</strong>
-        </article>
-        <article class="testimonial reveal tilt-card">
-          <p>“A good balance of design, content and technical execution. The website feels modern and easy to use.”</p>
-          <strong>Portfolio review</strong>
+          <p>“Fast, creative and practical. The design looked modern without making the website difficult to use.”</p>
+          <strong>Website project</strong>
         </article>
       </div>
     </section>
 
     <section class="section contact-section" id="contact">
-      <div class="container contact-grid">
-        <div class="contact-copy reveal">
-          <p class="kicker">Contact</p>
-          <h2>Have a website, AI workflow or automation idea?</h2>
-          <p>Send your project details, pages needed and preferred style. You can also call or WhatsApp me directly for quick discussion.</p>
-          <div class="contact-links">
-            <a href="mailto:kaforgeagency@gmail.com" id="emailLink">kaforgeagency@gmail.com</a>
-            <a href="https://github.com/abdullahqayyum622-netizen" target="_blank" rel="noreferrer">GitHub Profile</a>
-            <a href="https://wa.me/923305968731" target="_blank" rel="noreferrer">WhatsApp: 0330 5968731</a>
-            <a href="tel:03305968731">Call: 0330 5968731</a>
-          </div>
+      <div class="container contact-card reveal">
+        <div>
+          <p class="section-kicker">Contact</p>
+          <h2>Have a website idea? Let’s build it properly.</h2>
+          <p>Send your project details, pages needed and preferred style. You can also call or WhatsApp me at <strong>0330 5968731</strong>.</p>
         </div>
-
-        <form class="contact-form reveal" action="https://formsubmit.co/kaforgeagency@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New portfolio website inquiry" />
+        <div class="contact-actions">
+          <a class="btn btn-light" href="mailto:abdullahqayyum622@gmail.com">Email Me</a>
+          <a class="btn btn-glass" href="https://github.com/abdullahqayyum622-netizen" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn btn-glass" href="tel:03305968731">Call: 0330 5968731</a>
+          <a class="btn btn-glass" href="https://wa.me/923305968731" target="_blank" rel="noreferrer">WhatsApp</a>
+        </div>
+        <form class="email-form" action="https://formsubmit.co/abdullahqayyum622@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New portfolio inquiry" />
           <input type="hidden" name="_captcha" value="false" />
-          <label>Name<input type="text" name="name" placeholder="Your name" required /></label>
-          <label>Email<input type="email" name="email" placeholder="Your email" required /></label>
-          <label>Project type<select name="project_type" required><option value="">Select one</option><option>AI automation</option><option>n8n workflow</option><option>Portfolio website</option><option>Business website</option><option>Website redesign</option></select></label>
-          <label>Phone / WhatsApp<input type="tel" name="phone" placeholder="Your phone number" /></label>
-          <label>Message<textarea name="message" rows="5" placeholder="Tell me about your project" required></textarea></label>
-          <button class="btn btn-primary" type="submit">Send Message</button>
-          <p class="form-note">FormSubmit may ask for email confirmation on first use.</p>
+          <input type="email" name="email" placeholder="Your email address" required />
+          <input type="tel" name="phone" placeholder="Phone / WhatsApp" />
+          <button type="submit">Send</button>
         </form>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container footer-inner">
-      <p>© 2026 Muhammad Abdullah Qayyum. AI automation, full-stack development and practical digital systems.</p>
-      <button class="back-top" id="backTop" type="button">Back to top ↑</button>
-    </div>
+    <p>© 2026 Abdullah Qayyum. Built with focus, clarity and motion.</p>
   </footer>
 
-  <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-label="Project details">
-    <div class="modal-backdrop" data-close-modal></div>
-    <article class="modal-card" role="document">
-      <button class="modal-close" type="button" data-close-modal aria-label="Close project details">×</button>
-      <p class="kicker" id="modalType">Case study</p>
-      <h2 id="modalTitle">Project title</h2>
-      <p id="modalDescription">Project description</p>
-      <div class="modal-grid">
-        <div><strong>Problem</strong><span id="modalProblem"></span></div>
-        <div><strong>Solution</strong><span id="modalSolution"></span></div>
-        <div><strong>Deliverables</strong><span id="modalDeliverables"></span></div>
-        <div><strong>Tools</strong><span id="modalTools"></span></div>
-      </div>
-    </article>
-  </div>
-
-  <div class="command-palette" id="commandPalette" aria-hidden="true" role="dialog" aria-label="Quick actions">
-    <div class="command-backdrop" data-close-command></div>
-    <div class="command-box">
-      <div class="command-head"><span>Quick actions</span><button type="button" data-close-command>Esc</button></div>
-      <a href="#work">View case studies</a>
-      <a href="#skills">See skills matrix</a>
-      <a href="mailto:kaforgeagency@gmail.com">Send email</a>
-      <a href="tel:03305968731">Call Muhammad Abdullah</a>
-      <a href="assets/muhammad-abdullah-qayyum-cv.pdf" download>Download CV</a>
-      <a href="https://github.com/abdullahqayyum622-netizen" target="_blank" rel="noreferrer">Open GitHub</a>
-      <a href="https://wa.me/923305968731" target="_blank" rel="noreferrer">Open WhatsApp</a>
-    </div>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
   <script src="script.js"></script>
 </body>
 </html>
