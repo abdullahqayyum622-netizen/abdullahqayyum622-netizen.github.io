@@ -137,6 +137,7 @@ button, input { font: inherit; }
 .project-screen { min-height: 100%; border-radius: 34px; display: grid; place-items: center; overflow: hidden; position: relative; }
 .project-screen::before { content: ""; position: absolute; inset: 18px; border-radius: 26px; border: 1px solid rgba(255,255,255,.16); background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 34px 34px; }
 .project-screen b { position: relative; z-index: 1; font-size: clamp(4rem, 10vw, 8rem); letter-spacing: -.12em; }
+.restaurant-screen { background: radial-gradient(circle at 70% 20%, rgba(255,214,102,.55), transparent 28%), linear-gradient(135deg, #1c1207, #b45309); }
 .academy-screen { background: linear-gradient(135deg, #0f172a, #0369a1); }
 .package-screen { background: linear-gradient(135deg, #052e16, #16a34a); }
 .brand-screen { background: linear-gradient(135deg, #241038, #8b5cf6); }
@@ -153,8 +154,8 @@ button, input { font: inherit; }
 
 .contact-section { padding-top: 50px; }
 .contact-card { position: relative; overflow: hidden; display: grid; grid-template-columns: 1fr .7fr; gap: 40px; align-items: end; padding: 36px; border: 1px solid var(--line); border-radius: 44px; background: radial-gradient(circle at 85% 20%, rgba(137,213,255,.18), transparent 32%), linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.045)); backdrop-filter: blur(22px); box-shadow: var(--shadow); }
-.email-form { grid-column: 1 / -1; position: relative; display: flex; align-items: center; max-width: 620px; padding: 6px; border: 1px solid var(--line); border-radius: 999px; background: rgba(0,0,0,.28); backdrop-filter: blur(14px); }
-.email-form input { flex: 1; min-width: 0; border: 0; outline: 0; color: #fff; background: transparent; padding: 15px 18px; }
+.email-form { grid-column: 1 / -1; position: relative; display: flex; align-items: center; gap: 6px; max-width: 760px; padding: 6px; border: 1px solid var(--line); border-radius: 999px; background: rgba(0,0,0,.28); backdrop-filter: blur(14px); }
+.email-form input { flex: 1 1 220px; min-width: 0; border: 0; outline: 0; color: #fff; background: transparent; padding: 15px 18px; }
 .email-form input::placeholder { color: rgba(255,255,255,.52); }
 .email-form button { border: 0; border-radius: 999px; padding: 13px 22px; font-weight: 900; background: #fff; color: #07080d; cursor: pointer; }
 .footer { padding: 28px 0 44px; text-align: center; color: rgba(255,255,255,.5); }

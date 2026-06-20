@@ -1,6 +1,6 @@
 # Abdullah Qayyum Portfolio
 
-Premium personal portfolio website for Abdullah Qayyum, AI Engineer and Web Developer.
+Premium personal portfolio website for Abdullah Qayyum, AI Engineer and Web Developer. Includes updated contact details and a real project case study for Royal Orchard Restaurant Chakwal.
 
 ## What is included
 
@@ -30,3 +30,9 @@ Upload all files to the root of the GitHub Pages repository:
 ```text
 abdullahqayyum622-netizen.github.io
 ```
+
+## Updated details
+
+- Phone / WhatsApp: 0330 5968731
+- WhatsApp link: https://wa.me/923305968731
+- Featured project: Royal Orchard Restaurant Chakwal website
