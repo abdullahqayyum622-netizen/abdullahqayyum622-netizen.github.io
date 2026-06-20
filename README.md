@@ -1,38 +1,30 @@
-# Abdullah Qayyum Portfolio
+# Muhammad Abdullah Qayyum Portfolio
 
-Premium personal portfolio website for Abdullah Qayyum, AI Engineer and Web Developer. Includes updated contact details and a real project case study for Royal Orchard Restaurant Chakwal.
+Professional portfolio website for Muhammad Abdullah Qayyum.
 
-## What is included
+## Profile
 
-- Full-screen cinematic hero section
-- Glassmorphism navigation
-- Profile card with `assets/profile.jpg` fallback to GitHub avatar
-- Moving skills marquee
-- Professional services section
-- Featured case study section
-- Sticky project cards
-- Process and testimonial sections
-- Contact section with email, GitHub and WhatsApp buttons
-- Responsive layout and reduced-motion support
+- Role: AI Engineer & Automation Specialist
+- Focus: AI Automation, n8n Workflow Automation, Full-Stack Development, Web Development, Digital Marketing, SEO, Social Media Strategy
+- Location: Chakwal, Pakistan
+- Phone: 0330 5968731
+- WhatsApp: https://wa.me/923305968731
+- Email: kaforgeagency@gmail.com
+- GitHub: https://github.com/abdullahqayyum622-netizen
 
-## Files
+## Included assets
 
-- `index.html`
-- `style.css`
-- `script.js`
-- `assets/profile.jpg` optional
-- `assets/abdullah-qayyum-cv.pdf` optional
+- `assets/profile.jpg` — professional portfolio photo
+- `assets/muhammad-abdullah-qayyum-cv.pdf` — downloadable CV
 
-## Deployment
+## Featured project
 
-Upload all files to the root of the GitHub Pages repository:
+Royal Orchard Restaurant Chakwal Website
 
-```text
-abdullahqayyum622-netizen.github.io
-```
+## How to publish
 
-## Updated details
+Replace the files in your GitHub Pages repository, commit to `main`, and push origin.
 
-- Phone / WhatsApp: 0330 5968731
-- WhatsApp link: https://wa.me/923305968731
-- Featured project: Royal Orchard Restaurant Chakwal website
+Live URL:
+
+https://abdullahqayyum622-netizen.github.io/
