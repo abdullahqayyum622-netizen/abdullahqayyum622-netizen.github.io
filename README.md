@@ -1,31 +1,31 @@
 # Abdullah Qayyum Portfolio
 
-Professional portfolio website for Abdullah Qayyum, AI Engineer and Web Developer.
+Premium personal portfolio website for Abdullah Qayyum, AI Engineer and Web Developer.
+
+## What is included
+
+- Full-screen cinematic hero section
+- Glassmorphism navigation
+- Profile card with `assets/profile.jpg` fallback to GitHub avatar
+- Moving skills marquee
+- Professional services section
+- Featured case study section
+- Sticky project cards
+- Process and testimonial sections
+- Contact section with email, GitHub and WhatsApp buttons
+- Responsive layout and reduced-motion support
 
 ## Files
 
-- `index.html` — website structure and content
-- `style.css` — responsive design, 3D sections and animations
-- `script.js` — mobile menu, particles, scroll reveal and tilt effects
-- `assets/profile.jpg` — optional profile picture
-
-## Profile Picture
-
-Add your own picture as:
-
-```text
-assets/profile.jpg
-```
-
-If this file is not added, the website automatically uses the GitHub profile photo from:
-
-```text
-https://github.com/abdullahqayyum622-netizen.png
-```
+- `index.html`
+- `style.css`
+- `script.js`
+- `assets/profile.jpg` optional
+- `assets/abdullah-qayyum-cv.pdf` optional
 
 ## Deployment
 
-Upload all files to the root of your GitHub Pages repository:
+Upload all files to the root of the GitHub Pages repository:
 
 ```text
 abdullahqayyum622-netizen.github.io
