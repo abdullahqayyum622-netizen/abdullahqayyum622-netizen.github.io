@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Nikkah Ceremony - Live Real-Time Pact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- PeerJS for zero-server real-time connection across devices -->
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- html2canvas for downloading certificate -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body class="royal-theme">
+    <!-- Floating Rose Petals & Particle Background -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Top Music & Audio Bar -->
+    <div class="audio-control-bar">
+        <button id="musicToggleBtn" class="glass-btn icon-btn" title="Toggle Music">
+            <span id="musicIcon">🎵</span> <span id="musicText">Play Music</span>
+        </button>
+        <div class="live-status-pill disconnected" id="liveStatusPill">
+            <span class="status-dot"></span>
+            <span id="liveStatusText">Offline</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="app-container">
+        
+        <!-- STEP 1: ZERO-CODE ONE-CLICK AUTO CONNECT -->
+        <section id="stepSetup" class="card-glass active">
+            <div class="royal-header">
+                <div class="bismillah-calligraphy">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+                <h1 class="gold-gradient-text">Virtual Nikkah Ceremony</h1>
+                <p class="subtitle">Live Instant Auto-Connected Nikkah</p>
+            </div>
+
+            <div class="form-container">
+                <div class="input-group">
+                    <label>Aapka Naam (Your Name)</label>
+                    <input type="text" id="inputYourName" placeholder="e.g. Muhammad Ali" value="">
+                </div>
+                <div class="input-group">
+                    <label>Aapke Fiance Ka Naam (Partner's Name)</label>
+                    <input type="text" id="inputPartnerName" placeholder="e.g. Fatima Noor" value="">
+                </div>
+                <div class="input-group">
+                    <label>Haq Meher (Agreed Mahr Details)</label>
+                    <input type="text" id="inputMeher" placeholder="e.g. 1 Gold Ring & Endless Love" value="1 Gold Ring & Endless Love">
+                </div>
+
+                <div style="text-align: center; margin: 15px 0 5px; color: var(--gold-light); font-weight: 600;">
+                    👇 Bilkul Direct Join Karein (Koi Code / Link Nahi Chahiye):
+                </div>
+
+                <div class="role-selector-grid">
+                    <button id="btnCreateRoom" class="btn-royal primary mega-role-btn">
+                        <span class="btn-icon">👑</span>
+                        <div>
+                            <strong>Main Dulha Hoon (Groom)</strong>
+                            <small>Click to join live instantly</small>
+                        </div>
+                    </button>
+                    <button id="btnConfirmJoin" class="btn-royal accent mega-role-btn">
+                        <span class="btn-icon">👰</span>
+                        <div>
+                            <strong>Main Dulhan Hoon (Bride)</strong>
+                            <small>Click to join live instantly</small>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 2: WAITING ROOM -->
+        <section id="stepWaiting" class="card-glass hidden-box">
+            <div class="royal-header">
+                <div class="emblem-icon">💍</div>
+                <h2>Live Online Connected!</h2>
+                <p>Waiting for partner to press join on their screen...</p>
+            </div>
+
+            <div class="loader-pulse">
+                <div class="pulse-ring"></div>
+                <p id="waitingStatusMsg">Connecting to global live ceremony...</p>
+            </div>
+        </section>
+
+        <!-- STEP 3: LIVE CEREMONY STAGE -->
+        <section id="stepCeremony" class="card-glass hidden-box">
+            <div class="ceremony-header">
+                <div class="bismillah-calligraphy-sm">الرَّحْمَنِ الرَّحِيمِ بِسْمِ اللَّهِ</div>
+                <div class="couples-banner">
+                    <span id="labelGroomName" class="gold-text">Dulha Name</span>
+                    <span class="heart-pulse">❤️</span>
+                    <span id="labelBrideName" class="gold-text">Dulhan Name</span>
+                </div>
+                <div class="mahr-pill">Haq Meher: <span id="labelMahr">1 Gold Ring</span></div>
+            </div>
+
+            <div class="qazi-stage">
+                <div class="qazi-avatar">📜</div>
+                <div id="qaziSpeechBox" class="speech-bubble">
+                    <p id="qaziText">Loading ceremony steps...</p>
+                </div>
+            </div>
+
+            <!-- Stage Action Controls -->
+            <div class="ceremony-actions">
+                <!-- Groom Actions -->
+                <div id="groomControls" class="action-block hidden-box">
+                    <p class="role-badge">Dulha (Groom) Controls</p>
+                    <button id="btnMakeIjab" class="btn-royal primary-glow mega-btn">
+                        <span>💍</span> Step 1: Make Ijab (Offer Nikkah)
+                    </button>
+                    <p class="action-hint">Click to formally propose Nikkah to Dulhan on her screen!</p>
+                </div>
+
+                <!-- Bride Actions (3 Qabool Hai Steps) -->
+                <div id="brideControls" class="action-block hidden-box">
+                    <p class="role-badge">Dulhan (Bride) Controls</p>
+                    
+                    <div id="qaboolStep1" class="qabool-step">
+                        <button id="btnQabool1" class="btn-royal accent-glow mega-btn">
+                            <span>💍</span> Pehli Baar: QABOOL HAI
+                        </button>
+                    </div>
+
+                    <div id="qaboolStep2" class="qabool-step hidden-box">
+                        <button id="btnQabool2" class="btn-royal accent-glow mega-btn">
+                            <span>✨</span> Doosri Baar: QABOOL HAI
+                        </button>
+                    </div>
+
+                    <div id="qaboolStep3" class="qabool-step hidden-box">
+                        <button id="btnQabool3" class="btn-royal accent-glow mega-btn">
+                            <span>❤️</span> Teesri Baar: QABOOL HAI
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Groom Final Seal Action -->
+                <div id="groomSealControls" class="action-block hidden-box">
+                    <p class="role-badge">Dulha Final Confirmation</p>
+                    <button id="btnGroomSeal" class="btn-royal primary-glow mega-btn">
+                        <span>🎉</span> Complete & Seal Nikkah!
+                    </button>
+                </div>
+
+                <!-- Live Progress Dots -->
+                <div class="progress-bar-container">
+                    <div class="progress-track">
+                        <div id="progressFill" class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="step-dots">
+                        <span id="dot1" class="dot">1. Ijab</span>
+                        <span id="dot2" class="dot">2. Qabool (1)</span>
+                        <span id="dot3" class="dot">3. Qabool (2)</span>
+                        <span id="dot4" class="dot">4. Qabool (3)</span>
+                        <span id="dot5" class="dot">5. Mubarak!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 4: CELEBRATION & DIGITAL NIKKAHNAMA CERTIFICATE -->
+        <section id="stepCertificate" class="card-glass hidden-box">
+            <div class="celebration-banner">
+                <h1>🎉 ALHAMDULILLAH! 🎉</h1>
+                <p>Virtual Nikkah Successfully Completed!</p>
+            </div>
+
+            <!-- Authentic Nikkahnama Certificate Graphic -->
+            <div id="nikkahnamaDocument" class="nikkahnama-frame">
+                <div class="nikkah-border-outer">
+                    <div class="nikkah-border-inner">
+                        <div class="cert-header">
+                            <div class="cert-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+                            <h2>عَقْدُ النِّكَاح</h2>
+                            <h3>CERTIFICATE OF VIRTUAL NIKKAH PACT</h3>
+                            <div class="cert-serial">Serial Registration No: <span id="certSerial">NIK-2026-88492</span></div>
+                        </div>
+
+                        <div class="cert-body">
+                            <div class="cert-row">
+                                <div class="cert-field">
+                                    <label>Dulha (Groom):</label>
+                                    <span id="certGroom">Muhammad Ali</span>
+                                </div>
+                                <div class="cert-divider">💍</div>
+                                <div class="cert-field">
+                                    <label>Dulhan (Bride):</label>
+                                    <span id="certBride">Fatima Noor</span>
+                                </div>
+                            </div>
+
+                            <div class="cert-field-full">
+                                <label>Haq Meher (Agreed Mahr):</label>
+                                <span id="certMahr">1 Gold Ring & Endless Love</span>
+                            </div>
+
+                            <div class="cert-field-full">
+                                <label>Pact Date & Time:</label>
+                                <span id="certDate">September 19, 2026 | 1448 Hijri</span>
+                            </div>
+
+                            <div class="cert-vow-box">
+                                <p>"We solemnly enter into this sacred virtual bond of love, commitment, and mutual respect, promising to cherish and support each other today, tomorrow, and forever."</p>
+                            </div>
+
+                            <!-- Signatures Section -->
+                            <div class="signatures-grid">
+                                <div class="sig-box">
+                                    <label>Groom's Digital Signature</label>
+                                    <div class="sig-canvas-wrapper">
+                                        <canvas id="canvasGroomSig" width="220" height="70"></canvas>
+                                    </div>
+                                    <button class="btn-sig-clear" data-target="canvasGroomSig">Clear / Sign</button>
+                                </div>
+                                <div class="cert-seal-stamp">
+                                    <div class="seal-circle">
+                                        <span>SEALED</span>
+                                        <small>WITH LOVE</small>
+                                        <span>★ 2026 ★</span>
+                                    </div>
+                                </div>
+                                <div class="sig-box">
+                                    <label>Bride's Digital Signature</label>
+                                    <div class="sig-canvas-wrapper">
+                                        <canvas id="canvasBrideSig" width="220" height="70"></canvas>
+                                    </div>
+                                    <button class="btn-sig-clear" data-target="canvasBrideSig">Clear / Sign</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cert-footer">
+                            <small>Digitally Verified Real-Time Couple Pact • Forever & Always</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download & Share Controls -->
+            <div class="cert-actions">
+                <button id="btnDownloadCert" class="btn-royal primary-glow">
+                    <span>📜</span> Download Certificate
+                </button>
+                <button id="btnRestartCeremony" class="btn-royal secondary">
+                    <span>🔄</span> Replay Ceremony
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Sound Element -->
+    <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112189.mp3"></audio>
+
+    <script src="app.js"></script>
+</body>
+</html>
