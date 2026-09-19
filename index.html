@@ -1,248 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Abdullah Qayyum — AI Engineer and Web Developer building premium websites, AI workflows, landing pages, and business websites including Royal Orchard Restaurant Chakwal." />
-  <meta name="theme-color" content="#07080d" />
-  <title>Abdullah Qayyum — AI Engineer & Web Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Nikkah Ceremony - Live Real-Time Pact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- PeerJS for zero-server real-time connection across devices -->
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- html2canvas for downloading certificate -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
-  <div class="cursor-glow" aria-hidden="true"></div>
+<body class="royal-theme">
+    <!-- Floating Rose Petals & Particle Background -->
+    <canvas id="particleCanvas"></canvas>
 
-  <header class="site-header" id="siteHeader">
-    <nav class="nav-shell" aria-label="Main navigation">
-      <a href="#home" class="brand-pill" aria-label="Abdullah Qayyum home">
-        <span class="brand-mark">AQ</span>
-        <span>Abdullah Qayyum</span>
-      </a>
-
-      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-
-      <div class="nav-links" id="navLinks">
-        <a href="#about">Story</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#process">Process</a>
-        <a href="#contact" class="nav-cta">Contact</a>
-      </div>
-    </nav>
-  </header>
-
-  <main id="main">
-    <section class="hero-section" id="home">
-      <video class="hero-video" autoplay loop muted playsinline poster="" aria-hidden="true">
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260618_174853_aac61aa2-0f3f-4cf1-bc78-7f657dd11164.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-gradient" aria-hidden="true"></div>
-      <div class="hero-noise" aria-hidden="true"></div>
-
-      <div class="hero-content">
-        <div class="hero-top reveal">
-          <p class="eyebrow"><span></span> AI Engineer • Web Developer • Digital Builder</p>
-          <div class="availability"><span></span> Available for selected projects</div>
+    <!-- Top Music & Audio Bar -->
+    <div class="audio-control-bar">
+        <button id="musicToggleBtn" class="glass-btn icon-btn" title="Toggle Music">
+            <span id="musicIcon">🎵</span> <span id="musicText">Play Music</span>
+        </button>
+        <div class="live-status-pill disconnected" id="liveStatusPill">
+            <span class="status-dot"></span>
+            <span id="liveStatusText">Offline</span>
         </div>
+    </div>
 
-        <div class="hero-bottom">
-          <div class="hero-copy reveal">
-            <h1>Building digital experiences that feel premium, fast and useful.</h1>
-            <p>I design and build modern websites, landing pages, business sites and AI-assisted workflows for brands that want a clean, trustworthy online presence.</p>
-            <div class="hero-actions">
-              <a class="btn btn-light magnetic" href="#projects">Explore Work</a>
-              <a class="btn btn-glass magnetic" href="mailto:abdullahqayyum622@gmail.com">Start a Project</a>
-              <a class="btn btn-ghost magnetic" href="assets/abdullah-qayyum-cv.pdf" download>Download CV</a>
+    <!-- Main Container -->
+    <main class="app-container">
+        
+        <!-- STEP 1: ZERO-CODE ONE-CLICK AUTO CONNECT -->
+        <section id="stepSetup" class="card-glass active">
+            <div class="royal-header">
+                <div class="bismillah-calligraphy">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+                <h1 class="gold-gradient-text">Virtual Nikkah Ceremony</h1>
+                <p class="subtitle">Live Instant Auto-Connected Nikkah</p>
             </div>
-          </div>
 
-          <aside class="hero-card reveal tilt-card" aria-label="Profile summary card">
-            <div class="profile-orbit" aria-hidden="true"></div>
-            <div class="profile-photo-wrap">
-              <img src="assets/profile.jpg" alt="Abdullah Qayyum profile photo" onerror="this.onerror=null;this.src='https://github.com/abdullahqayyum622-netizen.png';" />
+            <div class="form-container">
+                <div class="input-group">
+                    <label>Aapka Naam (Your Name)</label>
+                    <input type="text" id="inputYourName" placeholder="e.g. Muhammad Ali" value="">
+                </div>
+                <div class="input-group">
+                    <label>Aapke Fiance Ka Naam (Partner's Name)</label>
+                    <input type="text" id="inputPartnerName" placeholder="e.g. Fatima Noor" value="">
+                </div>
+                <div class="input-group">
+                    <label>Haq Meher (Agreed Mahr Details)</label>
+                    <input type="text" id="inputMeher" placeholder="e.g. 1 Gold Ring & Endless Love" value="1 Gold Ring & Endless Love">
+                </div>
+
+                <div style="text-align: center; margin: 15px 0 5px; color: var(--gold-light); font-weight: 600;">
+                    👇 Bilkul Direct Join Karein (Koi Code / Link Nahi Chahiye):
+                </div>
+
+                <div class="role-selector-grid">
+                    <button id="btnCreateRoom" class="btn-royal primary mega-role-btn">
+                        <span class="btn-icon">👑</span>
+                        <div>
+                            <strong>Main Dulha Hoon (Groom)</strong>
+                            <small>Click to join live instantly</small>
+                        </div>
+                    </button>
+                    <button id="btnConfirmJoin" class="btn-royal accent mega-role-btn">
+                        <span class="btn-icon">👰</span>
+                        <div>
+                            <strong>Main Dulhan Hoon (Bride)</strong>
+                            <small>Click to join live instantly</small>
+                        </div>
+                    </button>
+                </div>
             </div>
-            <div>
-              <p class="card-label">Portfolio</p>
-              <h2>Abdullah Qayyum</h2>
-              <p class="card-role">AI Engineer & Web Developer</p>
+        </section>
+
+        <!-- STEP 2: WAITING ROOM -->
+        <section id="stepWaiting" class="card-glass hidden-box">
+            <div class="royal-header">
+                <div class="emblem-icon">💍</div>
+                <h2>Live Online Connected!</h2>
+                <p>Waiting for partner to press join on their screen...</p>
             </div>
-            <div class="metric-grid">
-              <div><strong>10+</strong><span>Website concepts</span></div>
-              <div><strong>20+</strong><span>Digital projects</span></div>
+
+            <div class="loader-pulse">
+                <div class="pulse-ring"></div>
+                <p id="waitingStatusMsg">Connecting to global live ceremony...</p>
             </div>
-            <div class="profile-tags">
-              <span>React</span><span>WordPress</span><span>AI Tools</span><span>SEO</span>
+        </section>
+
+        <!-- STEP 3: LIVE CEREMONY STAGE -->
+        <section id="stepCeremony" class="card-glass hidden-box">
+            <div class="ceremony-header">
+                <div class="bismillah-calligraphy-sm">الرَّحْمَنِ الرَّحِيمِ بِسْمِ اللَّهِ</div>
+                <div class="couples-banner">
+                    <span id="labelGroomName" class="gold-text">Dulha Name</span>
+                    <span class="heart-pulse">❤️</span>
+                    <span id="labelBrideName" class="gold-text">Dulhan Name</span>
+                </div>
+                <div class="mahr-pill">Haq Meher: <span id="labelMahr">1 Gold Ring</span></div>
             </div>
-          </aside>
-        </div>
-      </div>
-    </section>
 
-    <section class="marquee-section" aria-label="Skills and focus areas">
-      <div class="marquee-row">
-        <div class="marquee-track">
-          <span>Web Development</span><span>AI Workflows</span><span>Landing Pages</span><span>WordPress</span><span>React</span><span>Brand Websites</span><span>SEO Structure</span><span>3D Motion</span>
-          <span>Web Development</span><span>AI Workflows</span><span>Landing Pages</span><span>WordPress</span><span>React</span><span>Brand Websites</span><span>SEO Structure</span><span>3D Motion</span>
-        </div>
-      </div>
-      <div class="marquee-row reverse">
-        <div class="marquee-track">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Tailwind</span><span>GitHub</span><span>Canva</span><span>ChatGPT</span><span>Automation</span>
-          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Tailwind</span><span>GitHub</span><span>Canva</span><span>ChatGPT</span><span>Automation</span>
-        </div>
-      </div>
-    </section>
+            <div class="qazi-stage">
+                <div class="qazi-avatar">📜</div>
+                <div id="qaziSpeechBox" class="speech-bubble">
+                    <p id="qaziText">Loading ceremony steps...</p>
+                </div>
+            </div>
 
-    <section class="section about-section" id="about">
-      <div class="container about-grid">
-        <div class="section-kicker reveal">Story</div>
-        <div class="about-copy reveal">
-          <h2>I create websites that explain your work clearly and make people trust your brand.</h2>
-          <p>My focus is simple: strong visual direction, clear sections, smooth interactions and practical user flow. I combine web design, frontend development and AI-assisted planning to build websites that look professional and feel easy to use.</p>
-        </div>
-      </div>
-      <div class="floating-shape shape-one" aria-hidden="true">AI</div>
-      <div class="floating-shape shape-two" aria-hidden="true">UX</div>
-    </section>
+            <!-- Stage Action Controls -->
+            <div class="ceremony-actions">
+                <!-- Groom Actions -->
+                <div id="groomControls" class="action-block hidden-box">
+                    <p class="role-badge">Dulha (Groom) Controls</p>
+                    <button id="btnMakeIjab" class="btn-royal primary-glow mega-btn">
+                        <span>💍</span> Step 1: Make Ijab (Offer Nikkah)
+                    </button>
+                    <p class="action-hint">Click to formally propose Nikkah to Dulhan on her screen!</p>
+                </div>
 
-    <section class="section services-section" id="services">
-      <div class="container">
-        <div class="title-row reveal">
-          <p class="section-kicker">Services</p>
-          <h2>What I can build for you</h2>
-        </div>
-        <div class="service-list">
-          <article class="service-item reveal">
-            <span>01</span>
-            <div><h3>Portfolio Websites</h3><p>Professional personal websites with story, skills, services, projects, proof and contact flow.</p></div>
-          </article>
-          <article class="service-item reveal">
-            <span>02</span>
-            <div><h3>Business Websites</h3><p>Clean company websites for academies, startups, service businesses and local brands.</p></div>
-          </article>
-          <article class="service-item reveal">
-            <span>03</span>
-            <div><h3>Landing Pages</h3><p>Focused campaign pages designed around clarity, trust and lead generation.</p></div>
-          </article>
-          <article class="service-item reveal">
-            <span>04</span>
-            <div><h3>AI Workflow Setup</h3><p>Practical AI workflows for content planning, research, captions, automation and digital operations.</p></div>
-          </article>
-          <article class="service-item reveal">
-            <span>05</span>
-            <div><h3>Website Redesign</h3><p>Upgrading old websites with better layout, typography, mobile experience and calls to action.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
+                <!-- Bride Actions (3 Qabool Hai Steps) -->
+                <div id="brideControls" class="action-block hidden-box">
+                    <p class="role-badge">Dulhan (Bride) Controls</p>
+                    
+                    <div id="qaboolStep1" class="qabool-step">
+                        <button id="btnQabool1" class="btn-royal accent-glow mega-btn">
+                            <span>💍</span> Pehli Baar: QABOOL HAI
+                        </button>
+                    </div>
 
-    <section class="section featured-section">
-      <div class="container featured-card reveal tilt-card">
-        <div class="featured-text">
-          <p class="section-kicker">Featured case study</p>
-          <h2>Royal Orchard Restaurant Chakwal</h2>
-          <p>A professional restaurant website built for Royal Orchard Restaurant Chakwal with a clean brand presentation, menu-focused layout, location details, mobile-friendly sections and clear contact flow for customers.</p>
-          <div class="project-meta">
-            <span>Restaurant Website</span><span>Menu Layout</span><span>Mobile Responsive</span><span>Contact Flow</span>
-          </div>
-        </div>
-        <div class="featured-preview" aria-hidden="true">
-          <div class="browser-bar"><span></span><span></span><span></span></div>
-          <div class="preview-hero"></div>
-          <div class="preview-lines"><i></i><i></i><i></i></div>
-        </div>
-      </div>
-    </section>
+                    <div id="qaboolStep2" class="qabool-step hidden-box">
+                        <button id="btnQabool2" class="btn-royal accent-glow mega-btn">
+                            <span>✨</span> Doosri Baar: QABOOL HAI
+                        </button>
+                    </div>
 
-    <section class="section projects-section" id="projects">
-      <div class="container">
-        <div class="title-row reveal">
-          <p class="section-kicker">Projects</p>
-          <h2>Selected work examples</h2>
-        </div>
+                    <div id="qaboolStep3" class="qabool-step hidden-box">
+                        <button id="btnQabool3" class="btn-royal accent-glow mega-btn">
+                            <span>❤️</span> Teesri Baar: QABOOL HAI
+                        </button>
+                    </div>
+                </div>
 
-        <div class="sticky-projects">
-          <article class="project-panel reveal">
-            <div class="project-number">01</div>
-            <div class="project-info"><p>Restaurant website</p><h3>Royal Orchard Restaurant Chakwal</h3><span>A real restaurant website project with menu presentation, brand visuals, location details and a smooth customer inquiry flow.</span></div>
-            <div class="project-screen restaurant-screen"><b>RO</b></div>
-          </article>
-          <article class="project-panel reveal">
-            <div class="project-number">02</div>
-            <div class="project-info"><p>Business website</p><h3>Nobel Packaging</h3><span>Packaging company website structure with product categories and inquiry flow.</span></div>
-            <div class="project-screen package-screen"><b>NP</b></div>
-          </article>
-          <article class="project-panel reveal">
-            <div class="project-number">03</div>
-            <div class="project-info"><p>Academy website</p><h3>Knowledge Academy</h3><span>Modern education website with trust-building sections, course details and smooth visuals.</span></div>
-            <div class="project-screen academy-screen"><b>KA</b></div>
-          </article>
-        </div>
-      </div>
-    </section>
+                <!-- Groom Final Seal Action -->
+                <div id="groomSealControls" class="action-block hidden-box">
+                    <p class="role-badge">Dulha Final Confirmation</p>
+                    <button id="btnGroomSeal" class="btn-royal primary-glow mega-btn">
+                        <span>🎉</span> Complete & Seal Nikkah!
+                    </button>
+                </div>
 
-    <section class="section process-section" id="process">
-      <div class="container">
-        <div class="title-row reveal">
-          <p class="section-kicker">Process</p>
-          <h2>A simple, professional workflow</h2>
-        </div>
-        <div class="process-grid">
-          <div class="process-card reveal tilt-card"><span>01</span><h3>Discovery</h3><p>Understand your goal, audience, services, pages and visual direction.</p></div>
-          <div class="process-card reveal tilt-card"><span>02</span><h3>Structure</h3><p>Plan the sections, content flow, CTAs and trust-building elements.</p></div>
-          <div class="process-card reveal tilt-card"><span>03</span><h3>Design & Build</h3><p>Create the website with clean UI, responsive layout and smooth motion.</p></div>
-          <div class="process-card reveal tilt-card"><span>04</span><h3>Launch</h3><p>Test mobile, check links, improve speed and publish to hosting.</p></div>
-        </div>
-      </div>
-    </section>
+                <!-- Live Progress Dots -->
+                <div class="progress-bar-container">
+                    <div class="progress-track">
+                        <div id="progressFill" class="progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="step-dots">
+                        <span id="dot1" class="dot">1. Ijab</span>
+                        <span id="dot2" class="dot">2. Qabool (1)</span>
+                        <span id="dot3" class="dot">3. Qabool (2)</span>
+                        <span id="dot4" class="dot">4. Qabool (3)</span>
+                        <span id="dot5" class="dot">5. Mubarak!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="section testimonials-section">
-      <div class="container testimonials-grid">
-        <article class="testimonial reveal tilt-card">
-          <p>“Abdullah understands how to turn a rough idea into a clean digital presence. The website structure was clear and professional.”</p>
-          <strong>Client feedback</strong>
-        </article>
-        <article class="testimonial reveal tilt-card">
-          <p>“Fast, creative and practical. The design looked modern without making the website difficult to use.”</p>
-          <strong>Website project</strong>
-        </article>
-      </div>
-    </section>
+        <!-- STEP 4: CELEBRATION & DIGITAL NIKKAHNAMA CERTIFICATE -->
+        <section id="stepCertificate" class="card-glass hidden-box">
+            <div class="celebration-banner">
+                <h1>🎉 ALHAMDULILLAH! 🎉</h1>
+                <p>Virtual Nikkah Successfully Completed!</p>
+            </div>
 
-    <section class="section contact-section" id="contact">
-      <div class="container contact-card reveal">
-        <div>
-          <p class="section-kicker">Contact</p>
-          <h2>Have a website idea? Let’s build it properly.</h2>
-          <p>Send your project details, pages needed and preferred style. You can also call or WhatsApp me at <strong>0330 5968731</strong>.</p>
-        </div>
-        <div class="contact-actions">
-          <a class="btn btn-light" href="mailto:abdullahqayyum622@gmail.com">Email Me</a>
-          <a class="btn btn-glass" href="https://github.com/abdullahqayyum622-netizen" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn btn-glass" href="tel:03305968731">Call: 0330 5968731</a>
-          <a class="btn btn-glass" href="https://wa.me/923305968731" target="_blank" rel="noreferrer">WhatsApp</a>
-        </div>
-        <form class="email-form" action="https://formsubmit.co/abdullahqayyum622@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New portfolio inquiry" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="email" name="email" placeholder="Your email address" required />
-          <input type="tel" name="phone" placeholder="Phone / WhatsApp" />
-          <button type="submit">Send</button>
-        </form>
-      </div>
-    </section>
-  </main>
+            <!-- Authentic Nikkahnama Certificate Graphic -->
+            <div id="nikkahnamaDocument" class="nikkahnama-frame">
+                <div class="nikkah-border-outer">
+                    <div class="nikkah-border-inner">
+                        <div class="cert-header">
+                            <div class="cert-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+                            <h2>عَقْدُ النِّكَاح</h2>
+                            <h3>CERTIFICATE OF VIRTUAL NIKKAH PACT</h3>
+                            <div class="cert-serial">Serial Registration No: <span id="certSerial">NIK-2026-88492</span></div>
+                        </div>
 
-  <footer class="footer">
-    <p>© 2026 Abdullah Qayyum. Built with focus, clarity and motion.</p>
-  </footer>
+                        <div class="cert-body">
+                            <div class="cert-row">
+                                <div class="cert-field">
+                                    <label>Dulha (Groom):</label>
+                                    <span id="certGroom">Muhammad Ali</span>
+                                </div>
+                                <div class="cert-divider">💍</div>
+                                <div class="cert-field">
+                                    <label>Dulhan (Bride):</label>
+                                    <span id="certBride">Fatima Noor</span>
+                                </div>
+                            </div>
 
-  <script src="script.js"></script>
+                            <div class="cert-field-full">
+                                <label>Haq Meher (Agreed Mahr):</label>
+                                <span id="certMahr">1 Gold Ring & Endless Love</span>
+                            </div>
+
+                            <div class="cert-field-full">
+                                <label>Pact Date & Time:</label>
+                                <span id="certDate">September 19, 2026 | 1448 Hijri</span>
+                            </div>
+
+                            <div class="cert-vow-box">
+                                <p>"We solemnly enter into this sacred virtual bond of love, commitment, and mutual respect, promising to cherish and support each other today, tomorrow, and forever."</p>
+                            </div>
+
+                            <!-- Signatures Section -->
+                            <div class="signatures-grid">
+                                <div class="sig-box">
+                                    <label>Groom's Digital Signature</label>
+                                    <div class="sig-canvas-wrapper">
+                                        <canvas id="canvasGroomSig" width="220" height="70"></canvas>
+                                    </div>
+                                    <button class="btn-sig-clear" data-target="canvasGroomSig">Clear / Sign</button>
+                                </div>
+                                <div class="cert-seal-stamp">
+                                    <div class="seal-circle">
+                                        <span>SEALED</span>
+                                        <small>WITH LOVE</small>
+                                        <span>★ 2026 ★</span>
+                                    </div>
+                                </div>
+                                <div class="sig-box">
+                                    <label>Bride's Digital Signature</label>
+                                    <div class="sig-canvas-wrapper">
+                                        <canvas id="canvasBrideSig" width="220" height="70"></canvas>
+                                    </div>
+                                    <button class="btn-sig-clear" data-target="canvasBrideSig">Clear / Sign</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cert-footer">
+                            <small>Digitally Verified Real-Time Couple Pact • Forever & Always</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download & Share Controls -->
+            <div class="cert-actions">
+                <button id="btnDownloadCert" class="btn-royal primary-glow">
+                    <span>📜</span> Download Certificate
+                </button>
+                <button id="btnRestartCeremony" class="btn-royal secondary">
+                    <span>🔄</span> Replay Ceremony
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Sound Element -->
+    <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112189.mp3"></audio>
+
+    <script src="app.js"></script>
 </body>
 </html>
