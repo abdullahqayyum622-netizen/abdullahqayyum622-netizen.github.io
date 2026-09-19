@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Shaam-e-Saturday ✦ 3D Realistic Rose</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Three.js + GLTFLoader -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #06080d;
+      --bg-card: rgba(16, 20, 32, 0.82);
+      --border-gold: rgba(224, 186, 125, 0.3);
+      --gold: #dfb776;
+      --gold-light: #f7e2be;
+      --gold-glow: rgba(223, 183, 118, 0.4);
+      --text-main: #f0f3fa;
+      --text-muted: #9aa3b8;
+      --rose: #d62846;
+      --rose-glow: rgba(214, 40, 70, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    /* Ambient Background Canvas */
+    #ambientCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Outer Wrapper */
+    .app-container {
+      position: relative;
+      z-index: 2;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 20px 80px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    /* Glowing Orbs */
+    .glow-orb {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.16;
+    }
+    .orb-1 { top: 8%; left: -60px; background: #c59b27; }
+    .orb-2 { bottom: 25%; right: -60px; background: #bd1e3d; }
+
+    /* Elegant Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      background: rgba(223, 183, 118, 0.08);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      font-size: 0.76rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      align-self: center;
+    }
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 10px #4ade80;
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* Hero Card */
+    .hero-card {
+      text-align: center;
+      padding: 26px 18px 22px 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 30px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.3rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #ffffff 30%, var(--gold-light) 70%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .hero-sub {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* 3D Rose Canvas Container */
+    .rose-3d-wrapper {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      margin: 8px 0 4px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      touch-action: none;
+    }
+    .rose-3d-wrapper:active {
+      cursor: grabbing;
+    }
+
+    #rose3dCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 20px;
+    }
+
+    .rose-3d-glow {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(214, 40, 70, 0.38) 0%, rgba(223, 183, 118, 0.18) 45%, rgba(0,0,0,0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(24px);
+      animation: pulseGlow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.92); opacity: 0.6; }
+      100% { transform: scale(1.15); opacity: 0.95; }
+    }
+
+    .interaction-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .control-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(223, 183, 118, 0.3);
+      color: var(--gold-light);
+      font-size: 0.76rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .control-chip:hover, .control-chip:active {
+      background: rgba(223, 183, 118, 0.2);
+      border-color: var(--gold);
+      transform: scale(1.04);
+    }
+
+    /* Poetic Urdu Quote Card */
+    .quote-box {
+      background: linear-gradient(145deg, rgba(223, 183, 118, 0.08), rgba(214, 40, 70, 0.06));
+      border: 1px solid rgba(223, 183, 118, 0.22);
+      border-radius: 22px;
+      padding: 24px 20px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .quote-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--gold);
+      line-height: 0;
+      opacity: 0.35;
+      margin-bottom: 12px;
+    }
+
+    .urdu-couplet {
+      font-family: 'Noto Nastaliq Urdu', serif;
+      font-size: 1.18rem;
+      line-height: 2.2;
+      color: #fff;
+      direction: rtl;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      margin-bottom: 12px;
+    }
+
+    .roman-translation {
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--gold-light);
+      line-height: 1.5;
+    }
+
+    /* 7 Days of Waiting Section */
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-bottom: 14px;
+    }
+
+    .days-pill-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .day-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      padding: 10px 0;
+      border-radius: 14px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .day-pill.active {
+      background: linear-gradient(135deg, rgba(223, 183, 118, 0.25), rgba(214, 40, 70, 0.2));
+      border-color: var(--gold);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px var(--gold-glow);
+    }
+    .day-pill.sat-special {
+      border-color: rgba(223, 183, 118, 0.4);
+      color: var(--gold-light);
+    }
+
+    .day-message-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      padding: 20px 22px;
+      backdrop-filter: blur(15px);
+      transition: all 0.35s ease;
+      min-height: 95px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .day-msg-day {
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .day-msg-text {
+      font-size: 0.94rem;
+      color: var(--text-main);
+      line-height: 1.55;
+    }
+
+    /* The Main Letter Card */
+    .letter-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 26px;
+      padding: 30px 24px;
+      backdrop-filter: blur(25px);
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .letter-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .letter-greeting {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+      border-bottom: 1px dashed rgba(224, 186, 125, 0.2);
+      padding-bottom: 12px;
+    }
+
+    .letter-body {
+      font-size: 0.94rem;
+      color: #e2e8f0;
+      line-height: 1.85;
+      font-weight: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .letter-highlight {
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+
+    .letter-sign {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(224, 186, 125, 0.2);
+      text-align: right;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* Interactive Dua Card */
+    .dua-card {
+      background: linear-gradient(135deg, rgba(20, 26, 42, 0.88), rgba(12, 16, 26, 0.88));
+      border: 1px solid var(--border-gold);
+      border-radius: 26px;
+      padding: 28px 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dua-arabic {
+      font-family: 'Noto Nastaliq Urdu', serif;
+      font-size: 1.25rem;
+      line-height: 2.3;
+      color: var(--gold-light);
+      margin-bottom: 14px;
+      direction: rtl;
+    }
+
+    .dua-translation {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .btn-dua {
+      background: linear-gradient(135deg, #dfb776 0%, #b88d44 100%);
+      color: #0d1117;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 20px rgba(223, 183, 118, 0.35);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-dua:hover, .btn-dua:active {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 28px rgba(223, 183, 118, 0.5);
+    }
+
+    .dua-feedback {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.25);
+      color: #86efac;
+      font-size: 0.9rem;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    /* Call Ready Footer Pill */
+    .call-ready-card {
+      text-align: center;
+      padding: 24px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .call-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: 30px;
+      background: rgba(74, 222, 128, 0.12);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      color: #4ade80;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .call-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+    .call-btn:hover, .call-btn:active {
+      background: rgba(223, 183, 118, 0.12);
+      border-color: var(--gold);
+    }
+
+    /* Floating Sparkles & Petals Animation on Click */
+    .floating-sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 999;
+      animation: floatUpFade 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes floatUpFade {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.6) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(1.3) rotate(var(--rot));
+      }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 400px) {
+      .app-container { padding: 18px 14px 70px 14px; }
+      .hero-title { font-size: 1.95rem; }
+      .rose-3d-wrapper { height: 350px; }
+      .urdu-couplet { font-size: 1.05rem; }
+      .day-pill { font-size: 0.74rem; padding: 8px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <!-- Background Golden Particles Canvas -->
+  <canvas id="ambientCanvas"></canvas>
+
+  <main class="app-container">
+
+    <!-- Status Badge -->
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Saturday Frequency ✦ Online
+    </div>
+
+    <!-- Hero Card with Full 3D Realistic Rose matching User Reference -->
+    <section class="hero-card">
+      <h1 class="hero-title">Shaam-e-Saturday</h1>
+      <p class="hero-sub">Pure hafte ki masroofiyat ek taraf... aur is ek shaam ka sukoon ek taraf.</p>
+
+      <!-- 3D Rose Canvas Container -->
+      <div class="rose-3d-wrapper" id="rose3dContainer">
+        <div class="rose-3d-glow"></div>
+        <canvas id="rose3dCanvas"></canvas>
+      </div>
+
+      <!-- 3D Controls & Interaction Hints -->
+      <div class="interaction-controls">
+        <div class="control-chip" id="btnBloom">
+          <span>🌸 Tap to Bloom</span>
+        </div>
+        <div class="control-chip" id="btnRotateView">
+          <span>🔄 360° Spin</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Poetic Couplet Box -->
+    <section class="quote-box">
+      <div class="quote-mark">“</div>
+      <div class="urdu-couplet">
+        ہزاروں چہروں میں اک تیرا انتظار رہا<br>
+        ہر ایک روز ہمیں بس اسی شام کا شمار رہا
+      </div>
+      <div class="roman-translation">
+        "Hazaron chehron mein ik tera intezar raha,<br>
+        Har ek roz humein bas isi shaam ka shumar raha."
+      </div>
+    </section>
+
+    <!-- 7 Days of Waiting Interactive Section -->
+    <section>
+      <h2 class="section-title">Hafte Ke 7 Din</h2>
+      <p class="section-subtitle">Tap each day to see what was on my mind...</p>
+
+      <div class="days-pill-row">
+        <div class="day-pill" data-day="0">Mon</div>
+        <div class="day-pill" data-day="1">Tue</div>
+        <div class="day-pill" data-day="2">Wed</div>
+        <div class="day-pill" data-day="3">Thu</div>
+        <div class="day-pill" data-day="4">Fri</div>
+        <div class="day-pill sat-special active" data-day="5">Sat ✦</div>
+      </div>
+
+      <div class="day-message-card" id="dayMessageCard">
+        <div class="day-msg-day" id="dayLabel">SATURDAY ✦ TODAY</div>
+        <div class="day-msg-text" id="dayContent">
+          Alhamdulillah, pure 168 ghante ka intezar pura hua. Aaj ki shaam sirf aapki baaton aur aapki khairiyat ke naam hai.
+        </div>
+      </div>
+    </section>
+
+    <!-- The Heartfelt Letter -->
+    <section class="letter-card">
+      <h3 class="letter-greeting">Assalam-o-Alaikum, 🤍</h3>
+      <div class="letter-body">
+        <p>
+          Hafta bhar ki masroofiyat, dunya ke kaam aur roz mara ki bhag dor apni jagah... lekin jab bhi zehan ko sukoon ki talash hoti hai, mera khayal seedha aapki taraf chala jata hai.
+        </p>
+        <p>
+          Hum poore hafte mein sirf ek baar baat karte hain, lekin yeh fasla aur yeh adab hi hamare rishte ko aur zyada qeemti banata hai. Is ek call ki qadar wahi samajh sakta hai jo poora hafta ginte hue guzarta ho.
+        </p>
+        <p>
+          Aapki tehzeeb, aapka lehja aur aapki choti choti baatein mere dil mein aapke liye izzat aur mohabbat dono ko roz barha deti hain.
+        </p>
+        <p class="letter-highlight">
+          Mujhe us aane wale kal ka intezar hai jab hum dono shadi ke pakke bandhan mein honge, jahan 168 ghante ke intezar ke bajaye har din, har shaam aur har dua ek sath hogi Insha'Allah.
+        </p>
+      </div>
+      <div class="letter-sign">
+        Aapka Intezar Karne Wala ✨
+      </div>
+    </section>
+
+    <!-- Interactive Dua Card -->
+    <section class="dua-card">
+      <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 8px;">
+        Hamare Aane Wale Kal Ke Liye
+      </div>
+      <div class="dua-arabic">
+        رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ
+      </div>
+      <div class="dua-translation">
+        "Aye hamare Rab! Hamein hamare shareek-e-hayat se aankhon ki thandak ata farma aur hamare aane wale kal ko barkat se bhar de."
+      </div>
+      <button class="btn-dua" id="btnAmeen">
+        <span>Say Ameen</span> 🤲✨
+      </button>
+      <div class="dua-feedback" id="duaFeedback">
+        ✦ Ameen Summa Ameen! Dua dil se qubool ho. 🤍
+      </div>
+    </section>
+
+    <!-- Call Ready Status -->
+    <section class="call-ready-card">
+      <div class="call-status-badge">
+        <span class="badge-dot"></span>
+        Waiting for Our Call Tonight
+      </div>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">
+        Whenever you are free and ready, let me know. 📞
+      </p>
+      <button class="call-btn" id="btnReadyPulse">
+        <span>Tap when you are ready to talk</span> 🤍
+      </button>
+    </section>
+
+  </main>
+
+  <script>
+    // ==========================================================
+    // --- 1. REALISTIC 3D ROSE (GLTF Model + Procedural Fallback) ---
+    // ==========================================================
+    const container = document.getElementById('rose3dContainer');
+    const roseCanvas = document.getElementById('rose3dCanvas');
+
+    const scene = new THREE.Scene();
+    
+    // Camera framing the full single stem rose (matching reference image)
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+    camera.position.set(0, 0.05, 5.8);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: roseCanvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: "high-performance"
+    });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.35;
+    renderer.outputEncoding = THREE.sRGBEncoding;
+
+    // Lighting setup matching photo studio render
+    const ambientLight = new THREE.AmbientLight(0x401a24, 1.8);
+    scene.add(ambientLight);
+
+    // Warm key light
+    const keyLight = new THREE.DirectionalLight(0xfff3de, 2.5);
+    keyLight.position.set(2.5, 4, 3.5);
+    scene.add(keyLight);
+
+    // Deep crimson rim light for velvet edges
+    const rimLight = new THREE.DirectionalLight(0xff1e50, 3.8);
+    rimLight.position.set(-3, 2, -2.5);
+    scene.add(rimLight);
+
+    // Soft fill from below to illuminate leaves
+    const fillLight = new THREE.PointLight(0x55aa77, 0.9, 10);
+    fillLight.position.set(0, -2.5, 2);
+    scene.add(fillLight);
+
+    // Main Rose Root
+    const roseGroup = new THREE.Group();
+    scene.add(roseGroup);
+
+    let isGLTFActive = false;
+    const petals = [];
+
+    // Try loading downloaded 3D rose asset (rose.glb)
+    if (typeof THREE.GLTFLoader !== 'undefined') {
+      const loader = new THREE.GLTFLoader();
+      loader.load(
+        './rose.glb',
+        function(gltf) {
+          const model = gltf.scene;
+          
+          // Center and scale to fit container perfectly
+          const box = new THREE.Box3().setFromObject(model);
+          const size = box.getSize(new THREE.Vector3());
+          const center = box.getCenter(new THREE.Vector3());
+          
+          model.position.x = -center.x;
+          model.position.y = -center.y - 0.45;
+          model.position.z = -center.z;
+          
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const targetScale = 3.3 / maxDim;
+          model.scale.set(targetScale, targetScale, targetScale);
+
+          model.traverse(child => {
+            if (child.isMesh && child.material) {
+              child.material.side = THREE.DoubleSide;
+              if (child.material.roughness !== undefined) {
+                child.material.roughness = 0.38;
+              }
+              if (child.material.metalness !== undefined) {
+                child.material.metalness = 0.05;
+              }
+            }
+          });
+
+          roseGroup.add(model);
+          isGLTFActive = true;
+        },
+        undefined,
+        function(err) {
+          console.log('Using procedural realistic 3D model matched to user reference', err);
+          buildRealisticRoseModel();
+        }
+      );
+    } else {
+      buildRealisticRoseModel();
+    }
+
+    // High-Fidelity Procedural 3D Model Matched Specifically to User's Reference Photo
+    function buildRealisticRoseModel() {
+      // 1. Long Upright Stem (with natural woody-green curve)
+      const stemPoints = [
+        new THREE.Vector3(0, 1.1, 0),
+        new THREE.Vector3(0.015, 0.4, 0.01),
+        new THREE.Vector3(-0.02, -0.4, -0.01),
+        new THREE.Vector3(0.01, -1.2, 0.01),
+        new THREE.Vector3(-0.015, -1.9, 0)
+      ];
+      const stemCurve = new THREE.CatmullRomCurve3(stemPoints);
+      const stemGeom = new THREE.TubeGeometry(stemCurve, 32, 0.045, 12, false);
+      const stemMat = new THREE.MeshStandardMaterial({
+        color: 0x5a7845,
+        roughness: 0.55,
+        metalness: 0.05
+      });
+      const stemMesh = new THREE.Mesh(stemGeom, stemMat);
+      roseGroup.add(stemMesh);
+
+      // Thorns along stem
+      const thornMat = new THREE.MeshStandardMaterial({ color: 0x7c4530, roughness: 0.6 });
+      const thornGeom = new THREE.ConeGeometry(0.025, 0.12, 4);
+      thornGeom.rotateZ(Math.PI / 3);
+      const thorn1 = new THREE.Mesh(thornGeom, thornMat);
+      thorn1.position.set(0.04, 0.1, 0);
+      roseGroup.add(thorn1);
+      const thorn2 = new THREE.Mesh(thornGeom, thornMat);
+      thorn2.position.set(-0.04, -0.8, 0.02);
+      thorn2.rotation.y = Math.PI;
+      roseGroup.add(thorn2);
+
+      // 2. Realistic Serrated Leaves (Matching the 3 clusters in user's image)
+      const leafMat = new THREE.MeshStandardMaterial({
+        color: 0x3d612e,
+        roughness: 0.45,
+        metalness: 0.05,
+        side: THREE.DoubleSide
+      });
+      const leafBackMat = new THREE.MeshStandardMaterial({
+        color: 0x527740,
+        roughness: 0.5,
+        side: THREE.DoubleSide
+      });
+
+      function createLeaflet(w, l) {
+        const geom = new THREE.PlaneGeometry(w, l, 16, 16);
+        const pos = geom.attributes.position;
+        for (let i = 0; i < pos.count; i++) {
+          let px = pos.getX(i);
+          let py = pos.getY(i);
+          let ny = (py + l / 2) / l;
+          let widthFactor = Math.sin(ny * Math.PI);
+          pos.setX(i, px * widthFactor * 1.15);
+          // slight fold along center vein
+          let fold = -Math.abs(px) * 0.28 + (1 - ny) * 0.05;
+          pos.setZ(i, fold);
+        }
+        geom.computeVertexNormals();
+        return new THREE.Mesh(geom, leafMat);
+      }
+
+      function createLeafBranch(posY, angleY, tiltX, scale) {
+        const branchGroup = new THREE.Group();
+        branchGroup.position.set(0, posY, 0);
+        branchGroup.rotation.y = angleY;
+        branchGroup.rotation.x = tiltX;
+
+        // petiole / stalk
+        const petioleGeom = new THREE.CylinderGeometry(0.015, 0.018, 0.55, 6);
+        petioleGeom.rotateZ(Math.PI / 2);
+        petioleGeom.translate(0.28, 0, 0);
+        const petiole = new THREE.Mesh(petioleGeom, stemMat);
+        branchGroup.add(petiole);
+
+        // Terminal Leaflet
+        const mainLeaf = createLeaflet(0.38, 0.75);
+        mainLeaf.position.set(0.65, 0, 0);
+        mainLeaf.rotation.z = -Math.PI / 2;
+        mainLeaf.rotation.y = 0.2;
+        branchGroup.add(mainLeaf);
+
+        // Pair of lateral leaflets
+        const leftLeaf = createLeaflet(0.32, 0.6);
+        leftLeaf.position.set(0.4, 0.16, 0.12);
+        leftLeaf.rotation.z = -Math.PI / 3;
+        leftLeaf.rotation.x = 0.35;
+        branchGroup.add(leftLeaf);
+
+        const rightLeaf = createLeaflet(0.32, 0.6);
+        rightLeaf.position.set(0.4, -0.16, -0.12);
+        rightLeaf.rotation.z = -Math.PI / 1.5;
+        rightLeaf.rotation.x = -0.35;
+        branchGroup.add(rightLeaf);
+
+        branchGroup.scale.set(scale, scale, scale);
+        roseGroup.add(branchGroup);
+      }
+
+      // Cluster 1: Lower Left (drooping slightly like in photo)
+      createLeafBranch(-0.65, -0.7, 0.45, 0.95);
+      // Cluster 2: Middle Right
+      createLeafBranch(-0.05, 2.2, -0.35, 1.05);
+      // Cluster 3: Upper Left near bloom
+      createLeafBranch(0.55, -2.4, 0.25, 0.8);
+
+      // 3. Calyx Sepals (Pointed green stars curving underneath bloom)
+      const sepalMat = new THREE.MeshStandardMaterial({
+        color: 0x486b36,
+        roughness: 0.5,
+        side: THREE.DoubleSide
+      });
+      for (let i = 0; i < 5; i++) {
+        const sepalGeom = new THREE.ConeGeometry(0.08, 0.85, 4);
+        sepalGeom.rotateX(Math.PI / 2);
+        const sepal = new THREE.Mesh(sepalGeom, sepalMat);
+        const angle = (i / 5) * Math.PI * 2;
+        sepal.position.set(Math.sin(angle) * 0.18, 1.08, Math.cos(angle) * 0.18);
+        sepal.rotation.y = angle;
+        sepal.rotation.x = 1.65; // curled downwards
+        roseGroup.add(sepal);
+      }
+
+      // 4. Wide-Open Ruffled Crimson Rose Head (Exactly matching photo)
+      const innerVelvet = new THREE.MeshStandardMaterial({
+        color: 0x820c24,
+        roughness: 0.42,
+        metalness: 0.06,
+        side: THREE.DoubleSide
+      });
+      const midVelvet = new THREE.MeshStandardMaterial({
+        color: 0xb51435,
+        roughness: 0.36,
+        metalness: 0.05,
+        side: THREE.DoubleSide
+      });
+      const outerVelvet = new THREE.MeshStandardMaterial({
+        color: 0xdb1d44,
+        roughness: 0.32,
+        metalness: 0.04,
+        side: THREE.DoubleSide
+      });
+
+      function createCurledPetal(w, l, curlFactor, ruffleFreq, mat) {
+        const geom = new THREE.PlaneGeometry(w, l, 22, 22);
+        const pos = geom.attributes.position;
+        for (let i = 0; i < pos.count; i++) {
+          let x = pos.getX(i);
+          let y = pos.getY(i);
+          let ny = (y + l / 2) / l;
+          let nx = x / (w / 2);
+
+          // Wide ruffled crown shape
+          let widthProfile = Math.sin(ny * Math.PI * 0.85 + 0.15);
+          pos.setX(i, x * widthProfile * 1.2);
+
+          // Wavy ruffled outer petal edge (like the reference picture)
+          let ruffle = (ny > 0.6) ? Math.sin(nx * ruffleFreq) * 0.08 * (ny - 0.6) : 0;
+          let cup = -(nx * nx) * (w * 0.28) * (1 - ny * 0.2);
+          let tipCurl = (ny > 0.5) ? -Math.pow((ny - 0.5) / 0.5, 2) * curlFactor : 0;
+
+          pos.setZ(i, cup + tipCurl + ruffle);
+        }
+        geom.computeVertexNormals();
+        return new THREE.Mesh(geom, mat);
+      }
+
+      const flowerHead = new THREE.Group();
+      flowerHead.position.set(0, 1.25, 0);
+
+      // Core bud (tight spiral)
+      for (let i = 0; i < 6; i++) {
+        const p = createCurledPetal(0.55, 0.9, 0.15, 3, innerVelvet);
+        const angle = (i / 6) * Math.PI * 2;
+        p.rotation.y = angle;
+        p.rotation.x = 0.18;
+        p.position.set(Math.sin(angle) * 0.08, 0, Math.cos(angle) * 0.08);
+        flowerHead.add(p);
+        petals.push({ mesh: p, baseRotX: 0.18, openRotX: 0.5 });
+      }
+
+      // Middle cupped layers
+      for (let i = 0; i < 8; i++) {
+        const p = createCurledPetal(0.95, 1.2, 0.35, 4, midVelvet);
+        const angle = (i / 8) * Math.PI * 2 + 0.3;
+        p.rotation.y = angle;
+        p.rotation.x = 0.38;
+        p.position.set(Math.sin(angle) * 0.22, -0.06, Math.cos(angle) * 0.22);
+        flowerHead.add(p);
+        petals.push({ mesh: p, baseRotX: 0.38, openRotX: 0.85 });
+      }
+
+      // Outer wide ruffled petals (creating the signature flat ruffled top from the reference)
+      for (let i = 0; i < 11; i++) {
+        const p = createCurledPetal(1.4, 1.45, 0.65, 5, outerVelvet);
+        const angle = (i / 11) * Math.PI * 2 + 0.7;
+        p.rotation.y = angle;
+        p.rotation.x = 0.78;
+        p.position.set(Math.sin(angle) * 0.42, -0.14, Math.cos(angle) * 0.42);
+        flowerHead.add(p);
+        petals.push({ mesh: p, baseRotX: 0.78, openRotX: 1.25 });
+      }
+
+      roseGroup.add(flowerHead);
+    }
+
+    // Default tilt matching portrait view (shifted down so bloom is fully visible)
+    roseGroup.position.set(0, -0.48, 0);
+    roseGroup.rotation.y = 0.2;
+    roseGroup.rotation.x = 0.1;
+
+    // Resize Handler
+    function resize3d() {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+    window.addEventListener('resize', resize3d);
+
+    // Interactive 360 Drag & Swipe
+    let isDragging = false;
+    let prevMouseX = 0;
+    let prevMouseY = 0;
+    let targetRotY = roseGroup.rotation.y;
+    let targetRotX = roseGroup.rotation.x;
+
+    container.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      prevMouseX = e.clientX;
+      prevMouseY = e.clientY;
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - prevMouseX;
+      const dy = e.clientY - prevMouseY;
+      targetRotY += dx * 0.014;
+      targetRotX += dy * 0.008;
+      targetRotX = Math.max(-0.25, Math.min(0.7, targetRotX));
+      prevMouseX = e.clientX;
+      prevMouseY = e.clientY;
+    });
+
+    window.addEventListener('pointerup', () => { isDragging = false; });
+    window.addEventListener('pointercancel', () => { isDragging = false; });
+
+    // Bloom interaction
+    let bloomProgress = 0;
+    let targetBloom = 0;
+
+    function triggerBloom() {
+      targetBloom = (targetBloom === 0) ? 1 : 0;
+      for (let i = 0; i < 20; i++) {
+        const rect = container.getBoundingClientRect();
+        createSparkle(rect.left + rect.width / 2, rect.top + rect.height / 2 - 50, true);
+      }
+    }
+
+    document.getElementById('btnBloom').addEventListener('click', triggerBloom);
+    document.getElementById('btnRotateView').addEventListener('click', () => {
+      targetRotY += Math.PI * 0.65;
+    });
+
+    container.addEventListener('click', () => {
+      if (!isDragging) triggerBloom();
+    });
+
+    // 3D Render Loop
+    let clock = new THREE.Clock();
+    function render3D() {
+      const dt = clock.getDelta();
+      const elapsed = clock.getElapsedTime();
+
+      // Gentle floating and idle rotation
+      if (!isDragging) {
+        targetRotY += 0.005;
+      }
+      roseGroup.rotation.y += (targetRotY - roseGroup.rotation.y) * 0.08;
+      roseGroup.rotation.x += (targetRotX - roseGroup.rotation.x) * 0.08;
+      roseGroup.position.y = -0.48 + Math.sin(elapsed * 1.4) * 0.03;
+
+      // Bloom interpolation
+      bloomProgress += (targetBloom - bloomProgress) * 0.08;
+      petals.forEach(p => {
+        p.mesh.rotation.x = p.baseRotX + (p.openRotX - p.baseRotX) * bloomProgress;
+      });
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(render3D);
+    }
+    render3D();
+
+
+    // ==========================================
+    // --- 2. AMBIENT PARTICLES CANVAS ---
+    // ==========================================
+    const ambCanvas = document.getElementById('ambientCanvas');
+    const actx = ambCanvas.getContext('2d');
+
+    let awidth, aheight;
+    function aresize() {
+      awidth = ambCanvas.width = window.innerWidth;
+      aheight = ambCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', aresize);
+    aresize();
+
+    const particles = [];
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * awidth,
+        y: Math.random() * aheight,
+        size: Math.random() * 2 + 0.8,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: -Math.random() * 0.45 - 0.15,
+        opacity: Math.random() * 0.6 + 0.2,
+        color: Math.random() > 0.35 ? '223, 183, 118' : '214, 40, 70'
+      });
+    }
+
+    function animateAmbient() {
+      actx.clearRect(0, 0, awidth, aheight);
+      particles.forEach(p => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.y < -10) { p.y = aheight + 5; p.x = Math.random() * awidth; }
+        actx.beginPath();
+        actx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        actx.fillStyle = `rgba(${p.color}, ${p.opacity})`;
+        actx.shadowBlur = 8;
+        actx.shadowColor = `rgba(${p.color}, 0.8)`;
+        actx.fill();
+        actx.shadowBlur = 0;
+      });
+      requestAnimationFrame(animateAmbient);
+    }
+    animateAmbient();
+
+
+    // ==========================================
+    // --- 3. 7 DAYS OF WAITING LOGIC ---
+    // ==========================================
+    const dayData = [
+      {
+        day: "MONDAY ✦ SHURU-AAT",
+        text: "Naya hafta shuru hua, dimagh masroofiyat mein tha par dil mein aapka khayal aur kal ki baat ka ehsaas tha."
+      },
+      {
+        day: "TUESDAY ✦ INTEZAR",
+        text: "Kaam ki routine wahi purani... lekin dil hi dil mein Saturday ke 168 ghanton ka hisaab shuru ho chuka tha."
+      },
+      {
+        day: "WEDNESDAY ✦ AADHA SAFAR",
+        text: "Hafte ka aadha safar tay ho gaya. Jab bhi ghari dekhta, lagta tha waqt thora aur tezi se Saturday ki taraf bhage."
+      },
+      {
+        day: "THURSDAY ✦ TAQREEBAN WAQT",
+        text: "Bas kal ka ek din baqi hai... Subah se shaam tak yeh tasalli rahi ke bas chand ghante aur."
+      },
+      {
+        day: "FRIDAY ✦ AAKHRI RAAT",
+        text: "Intezar ki aakhri raat. Kal ki shaam hum aamne saamne na sahi, par ek doosre ki awaaz sun rahe honge Insha'Allah."
+      },
+      {
+        day: "SATURDAY ✦ TODAY",
+        text: "Alhamdulillah, pure 168 ghante ka intezar pura hua. Aaj ki shaam sirf aapki baaton aur aapki khairiyat ke naam hai. 🤍"
+      }
+    ];
+
+    const dayPills = document.querySelectorAll('.day-pill');
+    const dayLabel = document.getElementById('dayLabel');
+    const dayContent = document.getElementById('dayContent');
+    const dayCard = document.getElementById('dayMessageCard');
+
+    dayPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        dayPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const index = parseInt(pill.getAttribute('data-day'));
+        
+        dayCard.style.opacity = '0';
+        dayCard.style.transform = 'translateY(6px)';
+
+        setTimeout(() => {
+          dayLabel.textContent = dayData[index].day;
+          dayContent.textContent = dayData[index].text;
+          dayCard.style.opacity = '1';
+          dayCard.style.transform = 'translateY(0)';
+        }, 180);
+
+        spawnTouchEffect(window.innerWidth / 2, pill.getBoundingClientRect().top);
+      });
+    });
+
+
+    // ==========================================
+    // --- 4. DUA & CALL BUTTON INTERACTIONS ---
+    // ==========================================
+    const btnAmeen = document.getElementById('btnAmeen');
+    const duaFeedback = document.getElementById('duaFeedback');
+
+    btnAmeen.addEventListener('click', (e) => {
+      const rect = btnAmeen.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      for (let i = 0; i < 24; i++) {
+        createSparkle(cx, cy, false);
+      }
+
+      duaFeedback.style.display = 'block';
+      btnAmeen.style.opacity = '0.7';
+      btnAmeen.innerHTML = '<span>Ameen Recorded</span> 🤍';
+    });
+
+    const btnReady = document.getElementById('btnReadyPulse');
+    btnReady.addEventListener('click', (e) => {
+      const rect = btnReady.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      for (let i = 0; i < 20; i++) {
+        createSparkle(cx, cy, false);
+      }
+
+      btnReady.innerHTML = '<span>Alhamdulillah! I am waiting for you... 🤍</span>';
+      btnReady.style.borderColor = '#4ade80';
+      btnReady.style.color = '#4ade80';
+      btnReady.style.background = 'rgba(74, 222, 128, 0.1)';
+    });
+
+    // Particle Burst Helper
+    function createSparkle(x, y, isRose) {
+      const el = document.createElement('div');
+      el.className = 'floating-sparkle';
+      
+      const icons = isRose ? ['🌸', '✨', '🌹', '🤍', '🍃'] : ['✨', '⭐', '🤲', '🤍'];
+      el.textContent = icons[Math.floor(Math.random() * icons.length)];
+      
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      el.style.fontSize = `${Math.random() * 14 + 14}px`;
+
+      const angle = Math.random() * Math.PI * 2;
+      const distance = Math.random() * 90 + 40;
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance - 40;
+      const rot = (Math.random() - 0.5) * 120;
+
+      el.style.setProperty('--tx', `${tx}px`);
+      el.style.setProperty('--ty', `${ty}px`);
+      el.style.setProperty('--rot', `${rot}deg`);
+
+      document.body.appendChild(el);
+
+      setTimeout(() => {
+        el.remove();
+      }, 2000);
+    }
+
+    function spawnTouchEffect(x, y) {
+      for (let i = 0; i < 6; i++) {
+        createSparkle(x, y, false);
+      }
+    }
+  </script>
+</body>
+</html>
